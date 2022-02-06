@@ -50,10 +50,11 @@ class Wordle
           @canvas = canvas {
             background :white
             
+            @carets = []
             @letters = []
             5.times do |i|
-              rectangle(margin_x + i*50, margin_y + 40, 40, 5) {
-                background :gray
+              @carets << rectangle(margin_x + i*50, margin_y + 40, 40, 5) {
+                background i == 0 ? :blue : :gray
                 
                 @letters << text('', :default, [:default, -30]) {
                   font height: 40
@@ -62,9 +63,24 @@ class Wordle
             end
             
             on_swt_keydown do |key_event|
-              @letter = @letters.find {|letter| letter.string == ''}
-              @letter.string = key_event.keyCode.chr
-              @canvas.redraw
+              if key_event.keyCode == 8
+                @letter = @letters.find {|letter| letter.string == ''}
+                index = @letter ? @letters.index(@letter) - 1 : 4
+                @letter = @letters[index]
+                @letter.string = ''
+                unless index == 0
+                  @carets.each { |caret| caret.background = :gray}
+                  @carets[index - 1].background = :blue
+                end
+              else
+                @letter = @letters.find {|letter| letter.string == ''}
+                if @letter
+                  @carets.each { |caret| caret.background = :gray}
+                  index = @letters.index(@letter)
+                  @carets[index == 4 ? 4 : index + 1].background = :blue
+                  @letter.string = key_event.keyCode.chr.upcase
+                end
+              end
             end
             
           }
