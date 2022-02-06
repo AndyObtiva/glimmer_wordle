@@ -11,6 +11,34 @@ RSpec.describe Wordle::Model::FiveLetterWord do
     result = subject.guess('skill')
     
     expected_result = 5.times.map {:green}
+    expected_colored_alphabets = {
+      'a' => nil,
+      'b' => nil,
+      'c' => nil,
+      'd' => nil,
+      'e' => nil,
+      'f' => nil,
+      'g' => nil,
+      'h' => nil,
+      'i' => :green,
+      'j' => nil,
+      'k' => :green,
+      'l' => :green,
+      'm' => nil,
+      'n' => nil,
+      'o' => nil,
+      'p' => nil,
+      'q' => nil,
+      'r' => nil,
+      's' => :green,
+      't' => nil,
+      'u' => nil,
+      'v' => nil,
+      'w' => nil,
+      'x' => nil,
+      'y' => nil,
+      'z' => nil,
+    }
     
     expect(result).to eq(expected_result)
     expect(subject.guesses.count).to eq(1)
@@ -18,7 +46,7 @@ RSpec.describe Wordle::Model::FiveLetterWord do
     expect(subject.guess_results.count).to eq(1)
     expect(subject.guess_results.last).to eq(expected_result)
     expect(subject.status).to eq(:win)
-    # TODO check the keyboard alphabet colors too
+    expect(subject.colored_alphabets).to eq(expected_colored_alphabets)
   end
   
   it 'enables guessing 2 times and winning' do
@@ -27,6 +55,34 @@ RSpec.describe Wordle::Model::FiveLetterWord do
     result = subject.guess('shmek')
     
     expected_result = [:green, :gray, :gray, :gray, :yellow]
+    expected_colored_alphabets = {
+      'a' => nil,
+      'b' => nil,
+      'c' => nil,
+      'd' => nil,
+      'e' => :gray,
+      'f' => nil,
+      'g' => nil,
+      'h' => :gray,
+      'i' => nil,
+      'j' => nil,
+      'k' => :yellow,
+      'l' => nil,
+      'm' => :gray,
+      'n' => nil,
+      'o' => nil,
+      'p' => nil,
+      'q' => nil,
+      'r' => nil,
+      's' => :green,
+      't' => nil,
+      'u' => nil,
+      'v' => nil,
+      'w' => nil,
+      'x' => nil,
+      'y' => nil,
+      'z' => nil,
+    }
     
     expect(result).to eq(expected_result)
     expect(subject.guesses.count).to eq(1)
@@ -34,10 +90,39 @@ RSpec.describe Wordle::Model::FiveLetterWord do
     expect(subject.guess_results.count).to eq(1)
     expect(subject.guess_results.last).to eq(expected_result)
     expect(subject.status).to eq(:in_progress)
+    expect(subject.colored_alphabets).to eq(expected_colored_alphabets)
     
     result = subject.guess('skill')
 
     expected_result = 5.times.map {:green}
+    expected_colored_alphabets = {
+      'a' => nil,
+      'b' => nil,
+      'c' => nil,
+      'd' => nil,
+      'e' => :gray,
+      'f' => nil,
+      'g' => nil,
+      'h' => :gray,
+      'i' => :green,
+      'j' => nil,
+      'k' => :green,
+      'l' => :green,
+      'm' => :gray,
+      'n' => nil,
+      'o' => nil,
+      'p' => nil,
+      'q' => nil,
+      'r' => nil,
+      's' => :green,
+      't' => nil,
+      'u' => nil,
+      'v' => nil,
+      'w' => nil,
+      'x' => nil,
+      'y' => nil,
+      'z' => nil,
+    }
     
     expect(result).to eq(expected_result)
     expect(subject.guesses.count).to eq(2)
@@ -45,6 +130,7 @@ RSpec.describe Wordle::Model::FiveLetterWord do
     expect(subject.guess_results.count).to eq(2)
     expect(subject.guess_results.last).to eq(expected_result)
     expect(subject.status).to eq(:win)
+    expect(subject.colored_alphabets).to eq(expected_colored_alphabets)
   end
   
   it 'enables guessing 3 times and winning' do
@@ -267,6 +353,34 @@ RSpec.describe Wordle::Model::FiveLetterWord do
     result = subject.guess('shmoe')
     
     expected_result = [:green, :gray, :gray, :gray, :gray]
+    expected_colored_alphabets = {
+      'a' => nil,
+      'b' => nil,
+      'c' => nil,
+      'd' => nil,
+      'e' => :gray,
+      'f' => nil,
+      'g' => nil,
+      'h' => :gray,
+      'i' => nil,
+      'j' => nil,
+      'k' => nil,
+      'l' => nil,
+      'm' => :gray,
+      'n' => nil,
+      'o' => :gray,
+      'p' => nil,
+      'q' => nil,
+      'r' => nil,
+      's' => :green,
+      't' => nil,
+      'u' => nil,
+      'v' => nil,
+      'w' => nil,
+      'x' => nil,
+      'y' => nil,
+      'z' => nil,
+    }
     
     expect(result).to eq(expected_result)
     expect(subject.guesses.count).to eq(1)
@@ -274,61 +388,207 @@ RSpec.describe Wordle::Model::FiveLetterWord do
     expect(subject.guess_results.count).to eq(1)
     expect(subject.guess_results.last).to eq(expected_result)
     expect(subject.status).to eq(:in_progress)
+    expect(subject.colored_alphabets).to eq(expected_colored_alphabets)
     
     result = subject.guess('shmek')
     
     expected_result = [:green, :gray, :gray, :gray, :yellow]
-    
+    expected_colored_alphabets = {
+      'a' => nil,
+      'b' => nil,
+      'c' => nil,
+      'd' => nil,
+      'e' => :gray,
+      'f' => nil,
+      'g' => nil,
+      'h' => :gray,
+      'i' => nil,
+      'j' => nil,
+      'k' => :yellow,
+      'l' => nil,
+      'm' => :gray,
+      'n' => nil,
+      'o' => :gray,
+      'p' => nil,
+      'q' => nil,
+      'r' => nil,
+      's' => :green,
+      't' => nil,
+      'u' => nil,
+      'v' => nil,
+      'w' => nil,
+      'x' => nil,
+      'y' => nil,
+      'z' => nil,
+    }
+        
     expect(result).to eq(expected_result)
     expect(subject.guesses.count).to eq(2)
     expect(subject.guesses.last).to eq('shmek')
     expect(subject.guess_results.count).to eq(2)
     expect(subject.guess_results.last).to eq(expected_result)
     expect(subject.status).to eq(:in_progress)
+    expect(subject.colored_alphabets).to eq(expected_colored_alphabets)
     
     result = subject.guess('skimp')
     
     expected_result = [:green, :green, :green, :gray, :gray]
-    
+    expected_colored_alphabets = {
+      'a' => nil,
+      'b' => nil,
+      'c' => nil,
+      'd' => nil,
+      'e' => :gray,
+      'f' => nil,
+      'g' => nil,
+      'h' => :gray,
+      'i' => :green,
+      'j' => nil,
+      'k' => :green,
+      'l' => nil,
+      'm' => :gray,
+      'n' => nil,
+      'o' => :gray,
+      'p' => :gray,
+      'q' => nil,
+      'r' => nil,
+      's' => :green,
+      't' => nil,
+      'u' => nil,
+      'v' => nil,
+      'w' => nil,
+      'x' => nil,
+      'y' => nil,
+      'z' => nil,
+    }
+         
     expect(result).to eq(expected_result)
     expect(subject.guesses.count).to eq(3)
     expect(subject.guesses.last).to eq('skimp')
     expect(subject.guess_results.count).to eq(3)
     expect(subject.guess_results.last).to eq(expected_result)
     expect(subject.status).to eq(:in_progress)
+    expect(subject.colored_alphabets).to eq(expected_colored_alphabets)
     
     result = subject.guess('skiff')
     
     expected_result = [:green, :green, :green, :gray, :gray]
-    
+    expected_colored_alphabets = {
+      'a' => nil,
+      'b' => nil,
+      'c' => nil,
+      'd' => nil,
+      'e' => :gray,
+      'f' => :gray,
+      'g' => nil,
+      'h' => :gray,
+      'i' => :green,
+      'j' => nil,
+      'k' => :green,
+      'l' => nil,
+      'm' => :gray,
+      'n' => nil,
+      'o' => :gray,
+      'p' => :gray,
+      'q' => nil,
+      'r' => nil,
+      's' => :green,
+      't' => nil,
+      'u' => nil,
+      'v' => nil,
+      'w' => nil,
+      'x' => nil,
+      'y' => nil,
+      'z' => nil,
+    }
+             
     expect(result).to eq(expected_result)
     expect(subject.guesses.count).to eq(4)
     expect(subject.guesses.last).to eq('skiff')
     expect(subject.guess_results.count).to eq(4)
     expect(subject.guess_results.last).to eq(expected_result)
     expect(subject.status).to eq(:in_progress)
+    expect(subject.colored_alphabets).to eq(expected_colored_alphabets)
     
     result = subject.guess('shill')
     
     expected_result = [:green, :gray, :green, :green, :green]
-    
+    expected_colored_alphabets = {
+      'a' => nil,
+      'b' => nil,
+      'c' => nil,
+      'd' => nil,
+      'e' => :gray,
+      'f' => :gray,
+      'g' => nil,
+      'h' => :gray,
+      'i' => :green,
+      'j' => nil,
+      'k' => :green,
+      'l' => :green,
+      'm' => :gray,
+      'n' => nil,
+      'o' => :gray,
+      'p' => :gray,
+      'q' => nil,
+      'r' => nil,
+      's' => :green,
+      't' => nil,
+      'u' => nil,
+      'v' => nil,
+      'w' => nil,
+      'x' => nil,
+      'y' => nil,
+      'z' => nil,
+    }
+                 
     expect(result).to eq(expected_result)
     expect(subject.guesses.count).to eq(5)
     expect(subject.guesses.last).to eq('shill')
     expect(subject.guess_results.count).to eq(5)
     expect(subject.guess_results.last).to eq(expected_result)
     expect(subject.status).to eq(:in_progress)
+    expect(subject.colored_alphabets).to eq(expected_colored_alphabets)
     
     result = subject.guess('skull')
 
     expected_result = [:green, :green, :gray, :green, :green]
-    
+    expected_colored_alphabets = {
+      'a' => nil,
+      'b' => nil,
+      'c' => nil,
+      'd' => nil,
+      'e' => :gray,
+      'f' => :gray,
+      'g' => nil,
+      'h' => :gray,
+      'i' => :green,
+      'j' => nil,
+      'k' => :green,
+      'l' => :green,
+      'm' => :gray,
+      'n' => nil,
+      'o' => :gray,
+      'p' => :gray,
+      'q' => nil,
+      'r' => nil,
+      's' => :green,
+      't' => nil,
+      'u' => :gray,
+      'v' => nil,
+      'w' => nil,
+      'x' => nil,
+      'y' => nil,
+      'z' => nil,
+    }
+         
     expect(result).to eq(expected_result)
     expect(subject.guesses.count).to eq(6)
     expect(subject.guesses.last).to eq('skull')
     expect(subject.guess_results.count).to eq(6)
     expect(subject.guess_results.last).to eq(expected_result)
     expect(subject.status).to eq(:loss)
+    expect(subject.colored_alphabets).to eq(expected_colored_alphabets)
   end
   
   it 'returns nil for guessing after game win' do
