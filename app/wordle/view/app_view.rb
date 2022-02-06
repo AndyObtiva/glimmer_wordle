@@ -102,7 +102,7 @@ class Wordle
                   @letters[i].foreground = COLOR_TO_TEXT_COLOR_MAP[result_color]
                   @canvas.redraw
                 end
-              else # TODO check that you have a letter from a-z or A-Z
+              elsif ((65..90).to_a + (97..122).to_a).map {|n| n.chr}.include?(key_event.keyCode.chr)
                 @letter = @letters.find {|letter| letter.string == ''}
                 index = @letters.index(@letter)
                 if @letter
