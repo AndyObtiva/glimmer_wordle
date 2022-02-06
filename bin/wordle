@@ -1,0 +1,13 @@
+#!/usr/bin/env jruby
+
+runner = File.expand_path('../../app/wordle/launch.rb', __FILE__)
+
+# Detect if inside a JAR file or not
+if runner.include?('uri:classloader')
+  require runner
+else
+  require 'glimmer/launcher'
+  
+  launcher = Glimmer::Launcher.new([runner] + ARGV)
+  launcher.launch
+end
