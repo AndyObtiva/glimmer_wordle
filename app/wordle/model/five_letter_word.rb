@@ -28,9 +28,11 @@ class Wordle
       end
       
       def guess(word_guess)
+        return if status == :win || status == :loss
         guesses << word_guess
         guess_results << guess_result_for(word_guess)
-        self.status = :win if answer == guesses.last
+        self.status = :win if guesses.last == answer
+        self.status = :loss if guesses.last != answer && guesses.count == 6
         guess_results.last
       end
       
