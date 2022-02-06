@@ -29,7 +29,8 @@ class Wordle
       end
       
       def guess(word_guess)
-        return if status == :win || status == :loss
+        word_guess = word_guess.downcase
+        return [] if status == :win || status == :loss
         guesses << word_guess
         guess_results << guess_result_for(word_guess)
         update_colored_alphabets(word_guess, guess_results.last)

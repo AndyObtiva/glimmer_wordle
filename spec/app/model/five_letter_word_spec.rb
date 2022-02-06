@@ -49,6 +49,54 @@ RSpec.describe Wordle::Model::FiveLetterWord do
     expect(subject.colored_alphabets).to eq(expected_colored_alphabets)
   end
   
+  it 'enables guessing 1 time and winning by typing all caps' do
+    allow(described_class).to receive(:random_word) {'skill'}
+    
+    expect(subject.guesses.count).to eq(0)
+    expect(subject.guess_results.count).to eq(0)
+    expect(subject.status).to eq(:in_progress)
+    
+    result = subject.guess('SKILL')
+    
+    expected_result = 5.times.map {:green}
+    expected_colored_alphabets = {
+      'a' => nil,
+      'b' => nil,
+      'c' => nil,
+      'd' => nil,
+      'e' => nil,
+      'f' => nil,
+      'g' => nil,
+      'h' => nil,
+      'i' => :green,
+      'j' => nil,
+      'k' => :green,
+      'l' => :green,
+      'm' => nil,
+      'n' => nil,
+      'o' => nil,
+      'p' => nil,
+      'q' => nil,
+      'r' => nil,
+      's' => :green,
+      't' => nil,
+      'u' => nil,
+      'v' => nil,
+      'w' => nil,
+      'x' => nil,
+      'y' => nil,
+      'z' => nil,
+    }
+    
+    expect(result).to eq(expected_result)
+    expect(subject.guesses.count).to eq(1)
+    expect(subject.guesses.last).to eq('skill')
+    expect(subject.guess_results.count).to eq(1)
+    expect(subject.guess_results.last).to eq(expected_result)
+    expect(subject.status).to eq(:win)
+    expect(subject.colored_alphabets).to eq(expected_colored_alphabets)
+  end
+  
   it 'enables guessing 2 times and winning' do
     allow(described_class).to receive(:random_word) {'skill'}
     
@@ -597,7 +645,7 @@ RSpec.describe Wordle::Model::FiveLetterWord do
     subject.guess('skill')
     result = subject.guess('skill')
     
-    expect(result).to be_nil
+    expect(result).to be_empty
     expect(subject.status).to eq(:win)
   end
   
@@ -618,7 +666,7 @@ RSpec.describe Wordle::Model::FiveLetterWord do
 
     result = subject.guess('skill')
     
-    expect(result).to be_nil
+    expect(result).to be_empty
     expect(subject.status).to eq(:loss)
   end
     

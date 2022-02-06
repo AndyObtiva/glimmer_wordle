@@ -2,6 +2,18 @@ class Wordle
   module View
     class AppView
       include Glimmer::UI::CustomShell
+      
+      COLOR_TO_BACKGROUND_COLOR_MAP = {
+        green:  :dark_green,
+        yellow: :yellow,
+        gray:   :gray,
+      }
+      
+      COLOR_TO_TEXT_COLOR_MAP = {
+        green:  :white,
+        yellow: :black,
+        gray:   :white,
+      }
     
       ## Add options like the following to configure CustomShell by outside consumers
       #
@@ -25,6 +37,7 @@ class Wordle
           }
         }
         @five_letter_word = Model::FiveLetterWord.new
+        pd @five_letter_word.answer
       end
   
       ## Use after_body block to setup observers for widgets in body
@@ -55,7 +68,7 @@ class Wordle
             @borders = []
             @letters = []
             5.times do |i|
-              @rectangles << rectangle(margin_x + i*50, margin_y, 40, 40) {
+              @rectangles << rectangle(margin_x + i*45, margin_y, 40, 40) {
                 background :transparent
                 
                 @borders << rectangle {
@@ -82,10 +95,12 @@ class Wordle
               elsif @letters.find {|letter| letter.string == ''}.nil? && key_event.keyCode == swt(:cr)
                 word = @letters.map(&:string).join
                 guess_result = @five_letter_word.guess(word)
-                guess_result.each_with_index do |background_color, i|
-                  @borders.each { |caret| caret.foreground = background_color}
+                guess_result.each_with_index do |result_color, i|
+                  background_color = COLOR_TO_BACKGROUND_COLOR_MAP[result_color]
+                  @borders[i].foreground = background_color
                   @rectangles[i].background = background_color
-                  @letters.each { |letter| letter.foreground = :white}
+                  @letters[i].foreground = COLOR_TO_TEXT_COLOR_MAP[result_color]
+                  @canvas.redraw
                 end
               else # TODO check that you have a letter from a-z or A-Z
                 @letter = @letters.find {|letter| letter.string == ''}
