@@ -53,10 +53,11 @@ class Wordle
             @carets = []
             @letters = []
             5.times do |i|
-              @carets << rectangle(margin_x + i*50, margin_y + 40, 40, 5) {
-                background i == 0 ? :blue : :gray
+              @carets << rectangle(margin_x + i*50, margin_y, 40, 40) {
+                foreground i == 0 ? :title_background : :gray
+                line_width 2
                 
-                @letters << text('', :default, [:default, -30]) {
+                @letters << text('') {
                   font height: 40
                 }
               }
@@ -68,16 +69,16 @@ class Wordle
                 index = @letter ? @letters.index(@letter) - 1 : 4
                 @letter = @letters[index]
                 @letter.string = ''
-                unless index == 0
-                  @carets.each { |caret| caret.background = :gray}
-                  @carets[index - 1].background = :blue
+                if index > 0
+                  @carets.each { |caret| caret.foreground = :gray}
+                  @carets[index - 1].foreground = :title_background
                 end
               else
                 @letter = @letters.find {|letter| letter.string == ''}
+                index = @letters.index(@letter)
                 if @letter
-                  @carets.each { |caret| caret.background = :gray}
-                  index = @letters.index(@letter)
-                  @carets[index == 4 ? 4 : index + 1].background = :blue
+                  @carets.each { |caret| caret.foreground = :gray}
+                  @carets[index == 4 ? 4 : index + 1].foreground = :title_background
                   @letter.string = key_event.keyCode.chr.upcase
                 end
               end
