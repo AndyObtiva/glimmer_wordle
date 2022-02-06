@@ -24,6 +24,7 @@ class Wordle
             display_about_dialog
           }
         }
+        @five_letter_word = Model::FiveLetterWord.new
       end
   
       ## Use after_body block to setup observers for widgets in body
@@ -50,12 +51,17 @@ class Wordle
           @canvas = canvas {
             background :white
             
-            @carets = []
+            @rectangles = []
+            @borders = []
             @letters = []
             5.times do |i|
-              @carets << rectangle(margin_x + i*50, margin_y, 40, 40) {
-                foreground i == 0 ? :title_background : :gray
-                line_width 2
+              @rectangles << rectangle(margin_x + i*50, margin_y, 40, 40) {
+                background :transparent
+                
+                @borders << rectangle {
+                  foreground i == 0 ? :title_background : :gray
+                  line_width 2
+                }
                 
                 @letters << text('') {
                   font height: 40
@@ -70,15 +76,23 @@ class Wordle
                 @letter = @letters[index]
                 @letter.string = ''
                 if index > 0
-                  @carets.each { |caret| caret.foreground = :gray}
-                  @carets[index - 1].foreground = :title_background
+                  @borders.each { |caret| caret.foreground = :gray}
+                  @borders[index - 1].foreground = :title_background
                 end
-              else
+              elsif @letters.find {|letter| letter.string == ''}.nil? && key_event.keyCode == swt(:cr)
+                word = @letters.map(&:string).join
+                guess_result = @five_letter_word.guess(word)
+                guess_result.each_with_index do |background_color, i|
+                  @borders.each { |caret| caret.foreground = background_color}
+                  @rectangles[i].background = background_color
+                  @letters.each { |letter| letter.foreground = :white}
+                end
+              else # TODO check that you have a letter from a-z or A-Z
                 @letter = @letters.find {|letter| letter.string == ''}
                 index = @letters.index(@letter)
                 if @letter
-                  @carets.each { |caret| caret.foreground = :gray}
-                  @carets[index == 4 ? 4 : index + 1].foreground = :title_background
+                  @borders.each { |caret| caret.foreground = :gray}
+                  @borders[index == 4 ? 4 : index + 1].foreground = :title_background
                   @letter.string = key_event.keyCode.chr.upcase
                 end
               end
