@@ -110,3 +110,8 @@ RSpec.configure do |config|
 end
 
 require 'glimmer/rake_task'
+
+ROOT_PATH = File.expand_path('..', __dir__)
+APP_PATH = File.join(ROOT_PATH, 'app')
+
+require_relative '../app/wordle'
