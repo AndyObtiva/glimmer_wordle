@@ -37,7 +37,7 @@ class Wordle
           }
         }
         @five_letter_word = Model::FiveLetterWord.new
-        pd @five_letter_word.answer
+#         pd @five_letter_word.answer
       end
   
       ## Use after_body block to setup observers for widgets in body
@@ -84,35 +84,13 @@ class Wordle
             
             on_swt_keydown do |key_event|
               if key_event.keyCode == 8
-                @letter = @letters.find {|letter| letter.string == ''}
-                index = @letter ? @letters.index(@letter) - 1 : 4
-                @letter = @letters[index]
-                @letter.string = ''
-                if index > 0
-                  @borders.each { |caret| caret.foreground = :gray}
-                  @borders[index - 1].foreground = :title_background
-                end
-              elsif @letters.find {|letter| letter.string == ''}.nil? && key_event.keyCode == swt(:cr)
-                word = @letters.map(&:string).join
-                guess_result = @five_letter_word.guess(word)
-                guess_result.each_with_index do |result_color, i|
-                  background_color = COLOR_TO_BACKGROUND_COLOR_MAP[result_color]
-                  @borders[i].foreground = background_color
-                  @rectangles[i].background = background_color
-                  @letters[i].foreground = COLOR_TO_TEXT_COLOR_MAP[result_color]
-                  @canvas.redraw
-                end
-              elsif ((65..90).to_a + (97..122).to_a).map {|n| n.chr}.include?(key_event.keyCode.chr)
-                @letter = @letters.find {|letter| letter.string == ''}
-                index = @letters.index(@letter)
-                if @letter
-                  @borders.each { |caret| caret.foreground = :gray}
-                  @borders[index == 4 ? 4 : index + 1].foreground = :title_background
-                  @letter.string = key_event.keyCode.chr.upcase
-                end
+                do_backspace
+              elsif key_event.keyCode == swt(:cr) && word_filled_up?
+                do_guess
+              elsif valid_character?(key_event.keyCode.chr)
+                do_type(key_event.keyCode.chr)
               end
             end
-            
           }
         }
       }
@@ -137,6 +115,47 @@ class Wordle
           text 'About'
           message "Wordle #{VERSION}\n\n#{LICENSE}"
         }.open
+      end
+      
+      def do_backspace
+        @letter = @letters.find {|letter| letter.string == ''}
+        index = @letter ? @letters.index(@letter) - 1 : 4
+        @letter = @letters[index]
+        @letter.string = ''
+        if index > 0
+          @borders.each { |caret| caret.foreground = :gray}
+          @borders[index - 1].foreground = :title_background
+        end
+      end
+      
+      def do_guess
+        word = @letters.map(&:string).join
+        guess_result = @five_letter_word.guess(word)
+        guess_result.each_with_index do |result_color, i|
+          background_color = COLOR_TO_BACKGROUND_COLOR_MAP[result_color]
+          @borders[i].foreground = background_color
+          @rectangles[i].background = background_color
+          @letters[i].foreground = COLOR_TO_TEXT_COLOR_MAP[result_color]
+          @canvas.redraw
+        end
+      end
+      
+      def do_type(character)
+        @letter = @letters.find {|letter| letter.string == ''}
+        index = @letters.index(@letter)
+        if @letter
+          @borders.each { |caret| caret.foreground = :gray}
+          @borders[index == 4 ? 4 : index + 1].foreground = :title_background
+          @letter.string = character.upcase
+        end
+      end
+      
+      def word_filled_up?
+        @letters.find {|letter| letter.string == ''}.nil?
+      end
+      
+      def valid_character?(character)
+        ((65..90).to_a + (97..122).to_a).map {|n| n.chr}.include?(character)
       end
     end
   end
