@@ -17,16 +17,15 @@ class Wordle
       attr_accessor :guesses, :guess_results, :status, :answer
       
       def initialize
-        start
+        refresh
       end
       
-      def restart
+      def refresh
         self.guesses = []
         self.guess_results = []
         self.status = :in_progress
         self.answer = self.class.random_word
       end
-      alias start restart
       
       def guess(word_guess)
         guesses << word_guess

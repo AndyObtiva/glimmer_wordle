@@ -20,6 +20,19 @@ RSpec.describe Wordle::Model::FiveLetterWord do
     expect(subject.status).to eq(:win)
   end
   
-  it 'refreshes five letter word after game win'
+  it 'refreshes five letter word after game win' do
+    described_class.stub(:random_word).and_return('skill')
+    
+    result = subject.guess('skill')
+    
+    described_class.stub(:random_word).and_return('abbot')
+    
+    subject.refresh
+    
+    result = subject.guess('abbot')
+    
+    expect(subject.guesses.last).to eq('abbot')
+    expect(subject.status).to eq(:win)
+  end
   it 'refreshes five letter word after game loss'
 end
