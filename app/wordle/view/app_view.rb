@@ -21,7 +21,7 @@ class Wordle
             display_about_dialog
           }
           on_preferences {
-            display_preferences_dialog
+            display_about_dialog
           }
         }
       end
@@ -42,71 +42,54 @@ class Wordle
           image File.join(APP_ROOT, 'icons', 'windows', "Wordle.ico") if OS.windows?
           image File.join(APP_ROOT, 'icons', 'linux', "Wordle.png") unless OS.windows?
           text "Wordle - App View"
-        
-          grid_layout
-          label(:center) {
-            text <= [self, :greeting]
-            font height: 40
-            layout_data :fill, :center, true, true
-          }
           
-          menu_bar {
-            menu {
-              text '&File'
-              menu_item {
-                text '&About...'
-                on_widget_selected {
-                  display_about_dialog
+          app_menu_bar
+          
+          margin_x = 15
+          margin_y = 15
+          @canvas = canvas {
+            background :white
+            
+            @letters = []
+            5.times do |i|
+              rectangle(margin_x + i*50, margin_y + 40, 40, 5) {
+                background :gray
+                
+                @letters << text('', :default, [:default, -30]) {
+                  font height: 40
                 }
               }
-              menu_item {
-                text '&Preferences...'
-                on_widget_selected {
-                  display_preferences_dialog
-                }
+            end
+            
+            on_swt_keydown do |key_event|
+              @letter = @letters.find {|letter| letter.string == ''}
+              @letter.string = key_event.keyCode.chr
+              @canvas.redraw
+            end
+            
+          }
+        }
+      }
+      
+      def app_menu_bar
+        menu_bar {
+          menu {
+            text '&Help'
+            
+            menu_item {
+              text '&About...'
+              on_widget_selected {
+                display_about_dialog
               }
             }
           }
         }
-      }
+      end
   
       def display_about_dialog
         message_box(body_root) {
           text 'About'
           message "Wordle #{VERSION}\n\n#{LICENSE}"
-        }.open
-      end
-      
-      def display_preferences_dialog
-        dialog(swt_widget) {
-          text 'Preferences'
-          grid_layout {
-            margin_height 5
-            margin_width 5
-          }
-          group {
-            row_layout {
-              type :vertical
-              spacing 10
-            }
-            text 'Greeting'
-            font style: :bold
-            [
-              'Hello, World!',
-              'Howdy, Partner!'
-            ].each do |greeting_text|
-              button(:radio) {
-                text greeting_text
-                selection <= [self, :greeting, on_read: ->(g) { g == greeting_text }]
-                layout_data {
-                  width 160
-                }
-                on_widget_selected { |event|
-                  self.greeting = event.widget.getText
-                }
-              }
-            end
-          }
         }.open
       end
     end
