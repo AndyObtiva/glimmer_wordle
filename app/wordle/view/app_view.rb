@@ -46,7 +46,7 @@ class Wordle
           end
         }
         @five_letter_word = Model::FiveLetterWord.new
-        pd @five_letter_word.answer
+        puts @five_letter_word.answer
       end
   
       ## Use after_body block to setup observers for widgets in body
@@ -102,9 +102,10 @@ class Wordle
       end
       
       def word_guesser
+        @canvasses ||= []
         margin_x = 5
         margin_y = 5
-        @canvas = canvas {
+        @canvasses << canvas {
           layout_data(:center, :center, true, false) {
             width_hint 230
             height_hint 50
@@ -150,13 +151,32 @@ class Wordle
           @borders[i].foreground = background_color
           @rectangles[i].background = background_color
           @letters[i].foreground = COLOR_TO_TEXT_COLOR_MAP[result_color]
-          @canvas.redraw
+          async_exec { @canvasses.last.redraw }
         end
         if @five_letter_word.status == :in_progress
           body_root.content { word_guesser }
-          body_root.layout(true, true)
-          body_root.pack(true)
+        else
+          body_root.content {
+            @restart_button = button {
+              layout_data :center, :center, true, false
+              text 'Restart'
+              
+              on_widget_selected do
+                @restart_button.dispose
+                @canvasses.dup.each(&:dispose)
+                @canvasses.clear
+                body_root.content { word_guesser }
+                body_root.layout(true, true)
+                body_root.pack(true)
+                @canvasses.first.set_focus
+                @five_letter_word.refresh
+                puts @five_letter_word.answer
+              end
+            }
+          }
         end
+        body_root.layout(true, true)
+        body_root.pack(true)
       end
       
       def do_type(character)
