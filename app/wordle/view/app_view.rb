@@ -58,8 +58,8 @@ class Wordle
           
           # Replace example content below with custom shell content
           minimum_size 420, 540
-          image File.join(APP_ROOT, 'icons', 'windows', "Wordle.ico") if OS.windows?
-          image File.join(APP_ROOT, 'icons', 'linux', "Wordle.png") unless OS.windows?
+          image File.join(APP_ROOT, 'icons', 'windows', "Glimmer Wordle.ico") if OS.windows?
+          image File.join(APP_ROOT, 'icons', 'linux', "Glimmer Wordle.png") unless OS.windows?
           text "Glimmer Wordle"
           background :white
           
