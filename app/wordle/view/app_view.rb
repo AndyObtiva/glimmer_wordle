@@ -227,6 +227,13 @@ class Wordle
       def do_guess
         return if !word_filled_up?
         word = @letters.map(&:string).join
+        if invalid_word?(word)
+          message_box {
+            text 'Invalid Word'
+            message "The word you entered is not an allowed guess!\n\nPlease try another word!"
+          }.open
+          return
+        end
         guess_result = @five_letter_word.guess(word)
         update_guess_word_background_colors(guess_result)
         update_alphabet_background_colors
@@ -304,6 +311,10 @@ class Wordle
       
       def word_filled_up?
         @letters.find {|letter| letter.string == ''}.nil?
+      end
+      
+      def invalid_word?(word)
+        !Model::FiveLetterWord::WORLD_ALLOWED_GUESSES.include?(word.downcase)
       end
       
       def valid_character?(character)
