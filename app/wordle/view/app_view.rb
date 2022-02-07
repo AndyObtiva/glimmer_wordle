@@ -35,9 +35,18 @@ class Wordle
           on_preferences {
             display_about_dialog
           }
+          on_swt_keydown do |key_event|
+            if key_event.keyCode == 8
+              do_backspace
+            elsif key_event.keyCode == swt(:cr) && word_filled_up?
+              do_guess
+            elsif valid_character?(key_event.keyCode.chr)
+              do_type(key_event.keyCode.chr)
+            end
+          end
         }
         @five_letter_word = Model::FiveLetterWord.new
-#         pd @five_letter_word.answer
+        pd @five_letter_word.answer
       end
   
       ## Use after_body block to setup observers for widgets in body
@@ -51,47 +60,21 @@ class Wordle
       #
       body {
         shell {
+          grid_layout {
+            margin_width 0
+            margin_height 0
+          }
+          
           # Replace example content below with custom shell content
-          minimum_size 420, 240
+          minimum_size 420, 420
           image File.join(APP_ROOT, 'icons', 'windows', "Wordle.ico") if OS.windows?
           image File.join(APP_ROOT, 'icons', 'linux', "Wordle.png") unless OS.windows?
           text "Wordle - App View"
+          background :white
           
           app_menu_bar
           
-          margin_x = 15
-          margin_y = 15
-          @canvas = canvas {
-            background :white
-            
-            @rectangles = []
-            @borders = []
-            @letters = []
-            5.times do |i|
-              @rectangles << rectangle(margin_x + i*45, margin_y, 40, 40) {
-                background :transparent
-                
-                @borders << rectangle {
-                  foreground i == 0 ? :title_background : :gray
-                  line_width 2
-                }
-                
-                @letters << text('') {
-                  font height: 40
-                }
-              }
-            end
-            
-            on_swt_keydown do |key_event|
-              if key_event.keyCode == 8
-                do_backspace
-              elsif key_event.keyCode == swt(:cr) && word_filled_up?
-                do_guess
-              elsif valid_character?(key_event.keyCode.chr)
-                do_type(key_event.keyCode.chr)
-              end
-            end
-          }
+          word_guesser
         }
       }
       
@@ -117,6 +100,35 @@ class Wordle
         }.open
       end
       
+      def word_guesser
+        margin_x = 15
+        margin_y = 15
+        @canvas = canvas {
+          layout_data(:center, :center, true, false) {
+            width_hint 250
+          }
+          background :white
+          
+          @rectangles = []
+          @borders = []
+          @letters = []
+          5.times do |i|
+            @rectangles << rectangle(margin_x + i*45, margin_y, 40, 40) {
+              background :transparent
+              
+              @borders << rectangle {
+                foreground i == 0 ? :title_background : :gray
+                line_width 2
+              }
+              
+              @letters << text('') {
+                font height: 40
+              }
+            }
+          end
+        }
+      end
+      
       def do_backspace
         @letter = @letters.find {|letter| letter.string == ''}
         index = @letter ? @letters.index(@letter) - 1 : 4
@@ -137,6 +149,11 @@ class Wordle
           @rectangles[i].background = background_color
           @letters[i].foreground = COLOR_TO_TEXT_COLOR_MAP[result_color]
           @canvas.redraw
+        end
+        if @five_letter_word.status == :in_progress
+          body_root.content { word_guesser }
+          body_root.layout(true, true)
+          body_root.pack(true)
         end
       end
       
