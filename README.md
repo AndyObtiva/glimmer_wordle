@@ -1,6 +1,8 @@
 # Wordle - Word Game
 
-[Wordle](https://en.wikipedia.org/wiki/Wordle) word game desktop GUI for [Kevin Newton's blog post](https://kddnewton.com/2022/01/29/solving-wordle-in-ruby.html).
+[Wordle](https://en.wikipedia.org/wiki/Wordle) word game desktop GUI app written [test-first](https://github.com/AndyObtiva/wordle/blob/master/spec/app/model/five_letter_word_spec.rb) using [Glimmer DSL for SWT](https://github.com/AndyObtiva/glimmer-dsl-swt) (JRuby Desktop Development GUI Framework) as inspiration by [Kevin Newton's blog post](https://kddnewton.com/2022/01/29/solving-wordle-in-ruby.html).
+
+![Wordle Screenshot](screenshots/glimmer-wordle.png)
 
 ## Contributing
 

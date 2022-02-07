@@ -17,8 +17,8 @@ Juwelier::Tasks.new do |gem|
   gem.name = "wordle"
   gem.homepage = "http://github.com/AndyObtiva/wordle"
   gem.license = "MIT"
-  gem.summary = %Q{Wordle}
-  gem.description = %Q{Wordle}
+  gem.summary = %Q{Wordle - Word Game Desktop GUI App}
+  gem.description = %Q{Wordle - word game desktop GUI application written in Glimmer DSL for SWT (requires JRuby)}
   gem.email = "andy.am@gmail.com"
   gem.authors = ["Andy Maleh"]
 

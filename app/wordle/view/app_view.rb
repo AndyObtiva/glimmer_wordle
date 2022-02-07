@@ -5,13 +5,13 @@ class Wordle
       
       COLOR_TO_BACKGROUND_COLOR_MAP = {
         green:  :dark_green,
-        yellow: :yellow,
-        gray:   :gray,
+        yellow: :dark_yellow,
+        gray:   :dark_gray,
       }
       
       COLOR_TO_TEXT_COLOR_MAP = {
         green:  :white,
-        yellow: :black,
+        yellow: :white,
         gray:   :white,
       }
     
@@ -61,15 +61,16 @@ class Wordle
       body {
         shell {
           grid_layout {
-            margin_width 0
-            margin_height 0
+            margin_width 10
+            margin_height 10
+            vertical_spacing 0
           }
           
           # Replace example content below with custom shell content
-          minimum_size 420, 420
+          minimum_size 420, 343
           image File.join(APP_ROOT, 'icons', 'windows', "Wordle.ico") if OS.windows?
           image File.join(APP_ROOT, 'icons', 'linux', "Wordle.png") unless OS.windows?
-          text "Wordle - App View"
+          text "Glimmer Wordle"
           background :white
           
           app_menu_bar
@@ -96,16 +97,17 @@ class Wordle
       def display_about_dialog
         message_box(body_root) {
           text 'About'
-          message "Wordle #{VERSION}\n\n#{LICENSE}"
+          message "Glimmer Wordle #{VERSION}\n\n#{LICENSE}"
         }.open
       end
       
       def word_guesser
-        margin_x = 15
-        margin_y = 15
+        margin_x = 5
+        margin_y = 5
         @canvas = canvas {
           layout_data(:center, :center, true, false) {
-            width_hint 250
+            width_hint 230
+            height_hint 50
           }
           background :white
           
