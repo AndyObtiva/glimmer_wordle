@@ -50,7 +50,7 @@ class Wordle
       ## Top-most widget must be a shell or another custom shell
       #
       body {
-        shell {
+        shell(:no_resize) {
           grid_layout {
             margin_width 10
             margin_height 10
@@ -58,7 +58,7 @@ class Wordle
           }
           
           # Replace example content below with custom shell content
-          minimum_size 420, 390
+          minimum_size 420, 540
           image File.join(APP_ROOT, 'icons', 'windows', "Wordle.ico") if OS.windows?
           image File.join(APP_ROOT, 'icons', 'linux', "Wordle.png") unless OS.windows?
           text "Glimmer Wordle"
@@ -104,21 +104,21 @@ class Wordle
       def alphabets
         alphabet_row(ALPHABET_ROW1) {
           layout_data(:center, :center, true, false) {
-            width_hint 450
+            width_hint 325
             height_hint 50
           }
         }
         
         alphabet_row(ALPHABET_ROW2) {
           layout_data(:center, :center, true, false) {
-            width_hint 400
+            width_hint 295
             height_hint 50
           }
         }
         
         alphabet_row(ALPHABET_ROW3) {
           layout_data(:center, :center, true, false) {
-            width_hint 320
+            width_hint 230
             height_hint 50
           }
         }
@@ -133,7 +133,7 @@ class Wordle
           @alphabet_borders ||= []
           @alphabet_letters ||= []
           alphabet_characters.each_with_index do |alphabet_character, i|
-            @alphabet_rectangles << rectangle(i*45, @alphabet_row_offset_y, 40, 40) {
+            @alphabet_rectangles << rectangle(1 + i*32, @alphabet_row_offset_y, 28, 28) {
               background :transparent
               
               @alphabet_borders << rectangle {
@@ -142,7 +142,7 @@ class Wordle
               }
               
               @alphabet_letters << text(alphabet_character) {
-                font height: 40
+                font style: :bold, height: 28
               }
             }
           end
@@ -174,7 +174,7 @@ class Wordle
               }
               
               @letters << text('') {
-                font height: 40
+                font style: :bold, height: 40
               }
             }
           end
@@ -230,7 +230,7 @@ class Wordle
           }
         end
         body_root.layout(true, true)
-        body_root.pack(true)
+        body_root.pack_same_size
       end
       
       def do_type(character)
@@ -254,7 +254,7 @@ class Wordle
         @canvasses.clear
         body_root.content { word_guesser }
         body_root.layout(true, true)
-        body_root.pack(true)
+        body_root.pack_same_size
         @five_letter_word.refresh
         puts @five_letter_word.answer
       end
