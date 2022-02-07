@@ -244,6 +244,11 @@ class Wordle
       end
       
       def do_restart
+        (ALPHABET_ROW1 + ALPHABET_ROW2 + ALPHABET_ROW3).each_with_index do |alphabet_character, i|
+          @alphabet_borders[i].foreground = :gray
+          @alphabet_rectangles[i].background = :white
+          @alphabet_letters[i].foreground = :black
+        end
         @restart_button.dispose
         @canvasses.dup.each(&:dispose)
         @canvasses.clear
