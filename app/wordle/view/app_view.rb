@@ -67,7 +67,7 @@ class Wordle
           }
           
           # Replace example content below with custom shell content
-          minimum_size 420, 343
+          minimum_size 420, 390
           image File.join(APP_ROOT, 'icons', 'windows', "Wordle.ico") if OS.windows?
           image File.join(APP_ROOT, 'icons', 'linux', "Wordle.png") unless OS.windows?
           text "Glimmer Wordle"
@@ -76,6 +76,7 @@ class Wordle
           app_menu_bar
           
           label {
+            layout_data :center, :center, true, false
             text 'You have 6 tries to guess a 5-letter word'
           }
           
