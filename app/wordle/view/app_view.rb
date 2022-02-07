@@ -14,17 +14,12 @@ class Wordle
         yellow: :white,
         gray:   :white,
       }
+      
+      ALPHABET_ROW1 = %w[Q W E R T Y U I O P]
+      ALPHABET_ROW2 = %w[A S D F G H J K L]
+      ALPHABET_ROW3 = %w[Z X C V B N M]
+
     
-      ## Add options like the following to configure CustomShell by outside consumers
-      #
-      # options :title, :background_color
-      # option :width, default: 320
-      # option :height, default: 240
-      option :greeting, default: 'Hello, World!'
-  
-      ## Use before_body block to pre-initialize variables to use in body
-      #
-      #
       before_body do
         @display = display {
           on_about {
@@ -51,12 +46,6 @@ class Wordle
         puts @five_letter_word.answer
       end
   
-      ## Use after_body block to setup observers for widgets in body
-      #
-      # after_body do
-      #
-      # end
-  
       ## Add widget content inside custom shell body
       ## Top-most widget must be a shell or another custom shell
       #
@@ -76,6 +65,8 @@ class Wordle
           background :white
           
           app_menu_bar
+          
+          alphabets
           
           label {
             layout_data :center, :center, true, false
@@ -108,6 +99,54 @@ class Wordle
           text 'About'
           message "Glimmer Wordle #{VERSION}\n\n#{LICENSE}"
         }.open
+      end
+      
+      def alphabets
+        alphabet_row(ALPHABET_ROW1) {
+          layout_data(:center, :center, true, false) {
+            width_hint 450
+            height_hint 50
+          }
+        }
+        
+        alphabet_row(ALPHABET_ROW2) {
+          layout_data(:center, :center, true, false) {
+            width_hint 400
+            height_hint 50
+          }
+        }
+        
+        alphabet_row(ALPHABET_ROW3) {
+          layout_data(:center, :center, true, false) {
+            width_hint 320
+            height_hint 50
+          }
+        }
+      end
+      
+      def alphabet_row(alphabet_characters, &block)
+        canvas {
+          block.call
+          background :white
+          
+          @alphabet_rectangles ||= []
+          @alphabet_borders ||= []
+          @alphabet_letters ||= []
+          alphabet_characters.each_with_index do |alphabet_character, i|
+            @alphabet_rectangles << rectangle(i*45, @alphabet_row_offset_y, 40, 40) {
+              background :transparent
+              
+              @alphabet_borders << rectangle {
+                foreground :gray
+                line_width 2
+              }
+              
+              @alphabet_letters << text(alphabet_character) {
+                font height: 40
+              }
+            }
+          end
+        }
       end
       
       def word_guesser
@@ -168,13 +207,8 @@ class Wordle
         return if !word_filled_up?
         word = @letters.map(&:string).join
         guess_result = @five_letter_word.guess(word)
-        guess_result.each_with_index do |result_color, i|
-          background_color = COLOR_TO_BACKGROUND_COLOR_MAP[result_color]
-          @borders[i].foreground = background_color
-          @rectangles[i].background = background_color
-          @letters[i].foreground = COLOR_TO_TEXT_COLOR_MAP[result_color]
-          async_exec { @canvasses.last.redraw }
-        end
+        update_guess_word_background_colors(guess_result)
+        update_alphabet_background_colors
         if @five_letter_word.status == :in_progress
           @guess_button.dispose
           body_root.content {
@@ -218,6 +252,28 @@ class Wordle
         body_root.pack(true)
         @five_letter_word.refresh
         puts @five_letter_word.answer
+      end
+      
+      def update_guess_word_background_colors(guess_result)
+        guess_result.each_with_index do |result_color, i|
+          background_color = COLOR_TO_BACKGROUND_COLOR_MAP[result_color]
+          @borders[i].foreground = background_color
+          @rectangles[i].background = background_color
+          @letters[i].foreground = COLOR_TO_TEXT_COLOR_MAP[result_color]
+          async_exec { @canvasses.last.redraw }
+        end
+      end
+      
+      def update_alphabet_background_colors
+        (ALPHABET_ROW1 + ALPHABET_ROW2 + ALPHABET_ROW3).each_with_index do |alphabet_character, i|
+          result_color = @five_letter_word.colored_alphabets[alphabet_character.downcase]
+          if result_color
+            background_color = COLOR_TO_BACKGROUND_COLOR_MAP[result_color]
+            @alphabet_borders[i].foreground = background_color
+            @alphabet_rectangles[i].background = background_color
+            @alphabet_letters[i].foreground = COLOR_TO_TEXT_COLOR_MAP[result_color]
+          end
+        end
       end
       
       def word_filled_up?
