@@ -9,6 +9,9 @@ rescue
   # add more gems if needed
 end
 
+Clipboard.implementation = Clipboard::Java
+Clipboard.copy(Clipboard.paste) # pre-initialize library to avoid slowdown during use
+
 class Wordle
   include Glimmer
   

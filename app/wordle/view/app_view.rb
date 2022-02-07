@@ -37,13 +37,12 @@ class Wordle
               else
                 do_restart
               end
-            elsif valid_character?(key_event.keyCode.chr)
+            elsif valid_character?((key_event.keyCode.chr rescue ''))
               do_type(key_event.keyCode.chr)
             end
           end
         }
         @five_letter_word = Model::FiveLetterWord.new
-        puts @five_letter_word.answer
       end
   
       ## Add widget content inside custom shell body
@@ -256,6 +255,7 @@ class Wordle
               end
             }
           }
+          display_share_text_dialog
         end
         body_root.layout(true, true)
         body_root.pack(true)
@@ -284,7 +284,6 @@ class Wordle
         body_root.layout(true, true)
         body_root.pack(true)
         @five_letter_word.refresh
-        puts @five_letter_word.answer
       end
       
       def update_guess_word_background_colors(guess_result)
@@ -319,6 +318,42 @@ class Wordle
       
       def valid_character?(character)
         ((65..90).to_a + (97..122).to_a).map {|n| n.chr}.include?(character)
+      end
+      
+      def display_share_text_dialog
+        result = ''
+        @five_letter_word.guess_results.each do |row|
+          row.each do |result_color|
+            case result_color
+            when :green
+              result << "🟩"
+            when :yellow
+              result << "🟨"
+            when :gray
+              result << "⬜"
+            end
+          end
+          result << "\n"
+        end
+  
+        Clipboard.copy(result)
+
+        dialog(body_root) {
+          grid_layout
+          text 'Share Result'
+          
+          label {
+            layout_data :center, :center, true, false
+            text 'Result is copied to clipboard!'
+          }
+          
+          styled_text {
+            layout_data :fill, :fill, true, true
+            editable false
+            caret nil
+            text result
+          }
+        }.open
       end
     end
   end
