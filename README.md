@@ -1,5 +1,5 @@
-# <img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=85 /> Wordle
-## Word Game
+# <img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=85 /> Glimmer Wordle 1.0.0
+## Play Wordle Endlessly with No Limit!
 [![Gem Version](https://badge.fury.io/rb/glimmer_wordle.svg)](http://badge.fury.io/rb/glimmer_wordle)
 
 [Wordle](https://en.wikipedia.org/wiki/Wordle) word game desktop GUI app written [test-first](https://github.com/AndyObtiva/wordle/blob/master/spec/app/model/five_letter_word_spec.rb) using [Glimmer DSL for SWT](https://github.com/AndyObtiva/glimmer-dsl-swt) (JRuby Desktop Development GUI Framework) as inspiration by [Kevin Newton's blog post](https://kddnewton.com/2022/01/29/solving-wordle-in-ruby.html).
