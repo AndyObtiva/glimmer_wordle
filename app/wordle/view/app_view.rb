@@ -351,6 +351,7 @@ class Wordle
             layout_data :fill, :fill, true, true
             editable false
             caret nil
+            alignment :center
             text result
           }
         }.open

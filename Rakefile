@@ -25,6 +25,7 @@ Juwelier::Tasks.new do |gem|
   gem.files = Dir['VERSION', 'LICENSE.txt', 'app/**/*', 'bin/**/*', 'config/**/*', 'db/**/*', 'docs/**/*', 'fonts/**/*', 'icons/**/*', 'images/**/*', 'lib/**/*', 'script/**/*', 'sounds/**/*', 'vendor/**/*', 'videos/**/*']
   gem.require_paths = ['vendor', 'lib', 'app']
   gem.executables = ['glimmer_wordle']
+  gem.post_install_message = ['You may run glimmer_wordle to start the game!']
   # dependencies defined in Gemfile
 end
 Juwelier::RubygemsDotOrgTasks.new
