@@ -26,8 +26,6 @@ class Wordle
       #
       #
       before_body do
-        Display.app_name = 'Wordle'
-        Display.app_version = VERSION
         @display = display {
           on_about {
             display_about_dialog
@@ -38,8 +36,12 @@ class Wordle
           on_swt_keydown do |key_event|
             if key_event.keyCode == 8
               do_backspace
-            elsif key_event.keyCode == swt(:cr) && word_filled_up?
-              do_guess
+            elsif key_event.keyCode == swt(:cr)
+              if @five_letter_word.status == :in_progress
+                do_guess
+              else
+                do_restart
+              end
             elsif valid_character?(key_event.keyCode.chr)
               do_type(key_event.keyCode.chr)
             end
@@ -81,6 +83,8 @@ class Wordle
           }
           
           word_guesser
+          
+          guess_button
         }
       }
       
@@ -116,6 +120,7 @@ class Wordle
             height_hint 50
           }
           background :white
+          focus true
           
           @rectangles = []
           @borders = []
@@ -137,6 +142,17 @@ class Wordle
         }
       end
       
+      def guess_button
+        @guess_button = button {
+          layout_data :center, :center, true, false
+          text 'Guess'
+          
+          on_widget_selected do
+            do_guess
+          end
+        }
+      end
+      
       def do_backspace
         @letter = @letters.find {|letter| letter.string == ''}
         index = @letter ? @letters.index(@letter) - 1 : 4
@@ -149,6 +165,7 @@ class Wordle
       end
       
       def do_guess
+        return if !word_filled_up?
         word = @letters.map(&:string).join
         guess_result = @five_letter_word.guess(word)
         guess_result.each_with_index do |result_color, i|
@@ -159,23 +176,21 @@ class Wordle
           async_exec { @canvasses.last.redraw }
         end
         if @five_letter_word.status == :in_progress
-          body_root.content { word_guesser }
+          @guess_button.dispose
+          body_root.content {
+            word_guesser
+            guess_button
+          }
         else
+          @guess_button.dispose
           body_root.content {
             @restart_button = button {
               layout_data :center, :center, true, false
               text 'Restart'
+              focus true
               
               on_widget_selected do
-                @restart_button.dispose
-                @canvasses.dup.each(&:dispose)
-                @canvasses.clear
-                body_root.content { word_guesser }
-                body_root.layout(true, true)
-                body_root.pack(true)
-                @canvasses.first.set_focus
-                @five_letter_word.refresh
-                puts @five_letter_word.answer
+                do_restart
               end
             }
           }
@@ -192,6 +207,17 @@ class Wordle
           @borders[index == 4 ? 4 : index + 1].foreground = :title_background
           @letter.string = character.upcase
         end
+      end
+      
+      def do_restart
+        @restart_button.dispose
+        @canvasses.dup.each(&:dispose)
+        @canvasses.clear
+        body_root.content { word_guesser }
+        body_root.layout(true, true)
+        body_root.pack(true)
+        @five_letter_word.refresh
+        puts @five_letter_word.answer
       end
       
       def word_filled_up?

@@ -55,6 +55,6 @@ end
 
 require 'glimmer/rake_task'
 Glimmer::RakeTask::Package.jpackage_extra_args =
-  " --name 'Wordle'" +
-  " --description 'Wordle'"
+  " --name 'Glimmer Wordle'" +
+  " --description 'Glimmer Wordle'"
   # You can add more options from https://docs.oracle.com/en/java/javase/16/jpackage/packaging-tool-user-guide.pdf
