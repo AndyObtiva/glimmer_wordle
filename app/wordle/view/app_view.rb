@@ -82,10 +82,31 @@ class Wordle
       def app_menu_bar
         menu_bar {
           menu {
+            text '&Game'
+            
+            menu_item {
+              text '&Restart'
+              
+              on_widget_selected {
+                do_restart
+              }
+            }
+            
+            menu_item {
+              text 'E&xit'
+              
+              on_widget_selected {
+                exit(0)
+              }
+            }
+          }
+          
+          menu {
             text '&Help'
             
             menu_item {
               text '&About...'
+              
               on_widget_selected {
                 display_about_dialog
               }
@@ -104,21 +125,21 @@ class Wordle
       def alphabets
         alphabet_row(ALPHABET_ROW1) {
           layout_data(:center, :center, true, false) {
-            width_hint 325
+            width_hint 318
             height_hint 50
           }
         }
         
         alphabet_row(ALPHABET_ROW2) {
           layout_data(:center, :center, true, false) {
-            width_hint 295
+            width_hint 288
             height_hint 50
           }
         }
         
         alphabet_row(ALPHABET_ROW3) {
           layout_data(:center, :center, true, false) {
-            width_hint 230
+            width_hint 222
             height_hint 50
           }
         }
@@ -230,7 +251,7 @@ class Wordle
           }
         end
         body_root.layout(true, true)
-        body_root.pack_same_size
+        body_root.pack(true)
       end
       
       def do_type(character)
@@ -254,7 +275,7 @@ class Wordle
         @canvasses.clear
         body_root.content { word_guesser }
         body_root.layout(true, true)
-        body_root.pack_same_size
+        body_root.pack(true)
         @five_letter_word.refresh
         puts @five_letter_word.answer
       end
