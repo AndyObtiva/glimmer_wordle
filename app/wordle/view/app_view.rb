@@ -75,6 +75,10 @@ class Wordle
           
           app_menu_bar
           
+          label {
+            text 'You have 6 tries to guess a 5-letter word'
+          }
+          
           word_guesser
         }
       }

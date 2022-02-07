@@ -14,8 +14,8 @@ require 'rake'
 require 'juwelier'
 Juwelier::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
-  gem.name = "wordle"
-  gem.homepage = "http://github.com/AndyObtiva/wordle"
+  gem.name = "glimmer_wordle"
+  gem.homepage = "http://github.com/AndyObtiva/glimmer_wordle"
   gem.license = "MIT"
   gem.summary = %Q{Wordle - Word Game Desktop GUI App}
   gem.description = %Q{Wordle - word game desktop GUI application written in Glimmer DSL for SWT (requires JRuby)}
@@ -24,7 +24,7 @@ Juwelier::Tasks.new do |gem|
 
   gem.files = Dir['VERSION', 'LICENSE.txt', 'app/**/*', 'bin/**/*', 'config/**/*', 'db/**/*', 'docs/**/*', 'fonts/**/*', 'icons/**/*', 'images/**/*', 'lib/**/*', 'script/**/*', 'sounds/**/*', 'vendor/**/*', 'videos/**/*']
   gem.require_paths = ['vendor', 'lib', 'app']
-  gem.executables = ['wordle']
+  gem.executables = ['glimmer_wordle']
   # dependencies defined in Gemfile
 end
 Juwelier::RubygemsDotOrgTasks.new
@@ -48,7 +48,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "wordle #{version}"
+  rdoc.title = "glimmer_wordle #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
