@@ -10,6 +10,7 @@
 - Offer View -> Alphabet Layout menu item options of Alphabetical or Querty (storing in config file `~/.glimmer_wordle`)
 - Adjust the dark yellow (to #c9b458), dark green (to #6aaa64), and dark gray (to rgb 120 124 126) colors to match the original Wordle game colors
 - Fix an issue with backspacing all the way back to the first character after only typing one character causing rectangle highlight not to move back to first letter
+- Fix issue where upon restart, the guess button is showing above the entry field instead of below it
 
 # 1.0.0
 

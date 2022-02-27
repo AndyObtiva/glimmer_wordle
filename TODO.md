@@ -2,7 +2,7 @@
 
 ## Next (v1.1.0)
 
-- Fix issue where upon restart, the guess button is showing above the entry field instead of below it
+- Fix issue with letter highlight navigation going to last letter when word is empty after backspacing
 - Navigate letters with left and right keyboard buttons (or mouse click) and re-enter a letter (without having to use backspace)
 
 ## Future

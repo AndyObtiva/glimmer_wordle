@@ -371,10 +371,14 @@ class Wordle
           @alphabet_rectangles[i].background = :white
           @alphabet_letters[i].foreground = :black
         end
-        @restart_button.dispose
+        @restart_button&.dispose
         @canvasses.dup.each(&:dispose)
         @canvasses.clear
-        body_root.content { word_guesser }
+        @guess_button&.dispose
+        body_root.content {
+          word_guesser
+          guess_button
+        }
         body_root.layout(true, true)
         body_root.pack(true)
         @five_letter_word.refresh
