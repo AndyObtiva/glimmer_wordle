@@ -15,10 +15,20 @@ class Wordle
         gray:   :white,
       }
       
-      ALPHABET_ROW1 = %w[Q W E R T Y U I O P]
-      ALPHABET_ROW2 = %w[A S D F G H J K L]
-      ALPHABET_ROW3 = %w[Z X C V B N M]
-
+      ALPHABET_LAYOUTS = {
+        alphabetical: [
+          %w[A B C D E F G H I J],
+          %w[K L M N O P Q R S],
+          %w[T U V W X Y Z],
+        ],
+        querty: [
+          %w[Q W E R T Y U I O P],
+          %w[A S D F G H J K L],
+          %w[Z X C V B N M],
+        ],
+      }
+      
+      CONFIG_FILE = File.join(Dir.home, '.glimmer_wordle')
     
       before_body do
         @display = display {
@@ -43,6 +53,8 @@ class Wordle
           end
         }
         @five_letter_word = Model::FiveLetterWord.new
+        config = load_config
+        @alphabet_layout = config[:alphabet_layout] || :alphabetical
       end
   
       ## Add widget content inside custom shell body
@@ -65,7 +77,7 @@ class Wordle
           
           app_menu_bar
           
-          alphabets
+          alphabet_container
           
           label {
             layout_data :center, :center, true, false
@@ -96,6 +108,34 @@ class Wordle
               
               on_widget_selected {
                 exit(0)
+              }
+            }
+          }
+          
+          menu {
+            text '&View'
+            
+            menu {
+              text 'Alphabet &Layout'
+              
+              menu_item(:radio) {
+                text '&Alphabetical'
+                selection @alphabet_layout == :alphabetical
+                
+                on_widget_selected {
+                  self.alphabet_layout = :alphabetical
+                  rebuild_alphabet_container
+                }
+              }
+              
+              menu_item(:radio) {
+                text '&Querty'
+                selection @alphabet_layout == :querty
+                
+                on_widget_selected {
+                  self.alphabet_layout = :querty
+                  rebuild_alphabet_container
+                }
               }
             }
           }
@@ -156,22 +196,38 @@ class Wordle
         }.open
       end
       
+      def alphabet_container
+        @alphabet_container = composite {
+          layout_data(:center, :center, true, false)
+          
+          grid_layout {
+            margin_width 0
+            margin_height 0
+            vertical_spacing 0
+          }
+          
+          background :white
+        
+          alphabets
+        }
+      end
+      
       def alphabets
-        alphabet_row(ALPHABET_ROW1) {
+        alphabet_row(ALPHABET_LAYOUTS[@alphabet_layout][0]) {
           layout_data(:center, :center, true, false) {
             width_hint 318
             height_hint 50
           }
         }
         
-        alphabet_row(ALPHABET_ROW2) {
+        alphabet_row(ALPHABET_LAYOUTS[@alphabet_layout][1]) {
           layout_data(:center, :center, true, false) {
             width_hint 288
             height_hint 50
           }
         }
         
-        alphabet_row(ALPHABET_ROW3) {
+        alphabet_row(ALPHABET_LAYOUTS[@alphabet_layout][2]) {
           layout_data(:center, :center, true, false) {
             width_hint 222
             height_hint 50
@@ -202,6 +258,10 @@ class Wordle
             }
           end
         }
+      end
+      
+      def alphabet_layout_alphabets
+        ALPHABET_LAYOUTS[@alphabet_layout].reduce(:+)
       end
       
       def word_guesser
@@ -308,7 +368,7 @@ class Wordle
       
       def do_restart
         @share_text_dialog&.close
-        (ALPHABET_ROW1 + ALPHABET_ROW2 + ALPHABET_ROW3).each_with_index do |alphabet_character, i|
+        alphabet_layout_alphabets.each_with_index do |alphabet_character, i|
           @alphabet_borders[i].foreground = :gray
           @alphabet_rectangles[i].background = :white
           @alphabet_letters[i].foreground = :black
@@ -333,7 +393,7 @@ class Wordle
       end
       
       def update_alphabet_background_colors
-        (ALPHABET_ROW1 + ALPHABET_ROW2 + ALPHABET_ROW3).each_with_index do |alphabet_character, i|
+        alphabet_layout_alphabets.each_with_index do |alphabet_character, i|
           result_color = @five_letter_word.colored_alphabets[alphabet_character.downcase]
           if result_color
             background_color = COLOR_TO_BACKGROUND_COLOR_MAP[result_color]
@@ -357,21 +417,8 @@ class Wordle
       end
       
       def display_share_text_dialog
-        result = ''
-        @five_letter_word.guess_results.each do |row|
-          row.each do |result_color|
-            case result_color
-            when :green
-              result << "🟩"
-            when :yellow
-              result << "🟨"
-            when :gray
-              result << "⬜"
-            end
-          end
-          result << "\n"
-        end
-  
+        result = "#{@five_letter_word.answer.upcase}\n\n#{emoji_result}"
+          
         Clipboard.copy(result)
 
         @share_text_dialog = dialog(body_root) {
@@ -390,10 +437,68 @@ class Wordle
             editable false
             caret nil
             alignment :center
-            text "#{@five_letter_word.answer.upcase}\n\n#{result}"
+            text result
           }
         }
         @share_text_dialog.open
+      end
+      
+      def dispose_alphabet_container_children
+        @alphabet_rectangles.clear
+        @alphabet_borders.clear
+        @alphabet_letters.clear
+        @alphabet_container.children.each(&:dispose)
+      end
+      
+      def rebuild_alphabet_container
+        dispose_alphabet_container_children
+        @alphabet_container.content {
+          alphabets
+        }
+        @alphabet_container.layout(true, true)
+        @alphabet_container.pack(true)
+      end
+      
+      def alphabet_layout=(value)
+         @alphabet_layout = value
+         save_config
+      end
+      
+      def new_config
+        {
+          alphabet_layout: @alphabet_layout
+        }
+      end
+      
+      def save_config
+        File.write(CONFIG_FILE, YAML.dump(new_config))
+      rescue => e
+        puts e.full_message
+      end
+      
+      def load_config
+        File.exist?(CONFIG_FILE) ? YAML.load(File.read(CONFIG_FILE)) : {}
+      rescue => e
+        puts e.full_message
+        {}
+      end
+      
+      def emoji_result
+        result = ''
+        @five_letter_word.guess_results.each do |row|
+          row.each do |result_color|
+            case result_color
+            when :green
+              result << "🟩"
+            when :yellow
+              result << "🟨"
+            when :gray
+              result << "⬜"
+            end
+          end
+          result << "\n"
+        end
+        result
       end
     end
   end

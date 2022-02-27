@@ -2,14 +2,14 @@
 
 ## Next (v1.1.0)
 
-- Change alphabet layout to be abcd instead of querty (since users will not be mouse-clicking yet using keyboard)
 - Adjust the dark yellow (to #c9b458), dark green (to #6aaa64), and dark gray (to rgb 120 124 126) colors to match the original Wordle game colors
 - Fix an issue with backspacing all the way back to the first character after only typing one character causing rectangle highlight not to move back to first letter
 - Fix issue where upon restart, the guess button is showing above the entry field instead of below it
+- Navigate letters with left and right keyboard buttons (or mouse click) and re-enter a letter (without having to use backspace)
 
 ## Future
 
-- Navigate letters with left and right keyboard buttons (or mouse click) and re-enter a letter (without having to use backspace)
+- Prevent user from entering the same 5-letter word twice
 - Being able to re-open share dialog after closing at the end of a game
 - Keeping history of emoji statuses (but not answers to avoid ruining the game by making it easy to guess answers through history)
 - Support Windows
