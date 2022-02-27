@@ -352,7 +352,7 @@ class Wordle
             editable false
             caret nil
             alignment :center
-            text result
+            text "#{@five_letter_word.answer.upcase}\n\n#{result}"
           }
         }.open
       end

@@ -2,7 +2,6 @@
 
 ## Next (v1.1.0)
 
-- Display answer when losing 
 - Add answer to top of the shared emoji
 - Add Help menu Instructions menu item
 - Change alphabet layout to be abcd instead of querty (since users will not be mouse-clicking yet using keyboard)
