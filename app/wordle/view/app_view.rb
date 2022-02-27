@@ -343,6 +343,8 @@ class Wordle
           grid_layout
           text 'Share Result'
           
+          app_menu_bar
+          
           label {
             layout_data :center, :center, true, false
             text 'Result is copied to clipboard!'
