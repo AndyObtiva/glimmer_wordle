@@ -2,7 +2,6 @@
 
 ## Next (v1.1.0)
 
-- Fix an issue with backspacing all the way back to the first character after only typing one character causing rectangle highlight not to move back to first letter
 - Fix issue where upon restart, the guess button is showing above the entry field instead of below it
 - Navigate letters with left and right keyboard buttons (or mouse click) and re-enter a letter (without having to use backspace)
 

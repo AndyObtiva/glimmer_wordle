@@ -312,10 +312,8 @@ class Wordle
         index = @letter ? @letters.index(@letter) - 1 : 4
         @letter = @letters[index]
         @letter.string = ''
-        if index > 0
-          @borders.each { |caret| caret.foreground = :gray}
-          @borders[index - 1].foreground = :title_background
-        end
+        @borders.each { |caret| caret.foreground = :gray}
+        @borders[index].foreground = :title_background
       end
       
       def do_guess
