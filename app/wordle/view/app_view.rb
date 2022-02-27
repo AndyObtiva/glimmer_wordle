@@ -272,6 +272,7 @@ class Wordle
       end
       
       def do_restart
+        @share_text_dialog&.close
         (ALPHABET_ROW1 + ALPHABET_ROW2 + ALPHABET_ROW3).each_with_index do |alphabet_character, i|
           @alphabet_borders[i].foreground = :gray
           @alphabet_rectangles[i].background = :white
@@ -338,7 +339,7 @@ class Wordle
   
         Clipboard.copy(result)
 
-        dialog(body_root) {
+        @share_text_dialog = dialog(body_root) {
           grid_layout
           text 'Share Result'
           
@@ -354,7 +355,8 @@ class Wordle
             alignment :center
             text "#{@five_letter_word.answer.upcase}\n\n#{result}"
           }
-        }.open
+        }
+        @share_text_dialog.open
       end
     end
   end
