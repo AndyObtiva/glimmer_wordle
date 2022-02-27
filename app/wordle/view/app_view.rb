@@ -309,7 +309,7 @@ class Wordle
       
       def do_backspace
         @letter = @letters.find {|letter| letter.string == ''}
-        index = @letter ? @letters.index(@letter) - 1 : 4
+        index = @letter ? [@letters.index(@letter) - 1, 0].max : 4
         @letter = @letters[index]
         @letter.string = ''
         @borders.each { |caret| caret.foreground = :gray}
