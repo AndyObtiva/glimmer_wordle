@@ -4,9 +4,9 @@ class Wordle
       include Glimmer::UI::CustomShell
       
       COLOR_TO_BACKGROUND_COLOR_MAP = {
-        green:  :dark_green,
-        yellow: :dark_yellow,
-        gray:   :dark_gray,
+        green:  rgb(106, 170, 100),
+        yellow: rgb(201, 180, 88),
+        gray:   rgb(120, 124, 126),
       }
       
       COLOR_TO_TEXT_COLOR_MAP = {
