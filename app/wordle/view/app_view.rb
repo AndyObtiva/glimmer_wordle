@@ -104,7 +104,15 @@ class Wordle
             text '&Help'
             
             menu_item {
-              text '&About...'
+              text '&Instructions'
+              
+              on_widget_selected {
+                display_instructions_dialog
+              }
+            }
+            
+            menu_item {
+              text '&About'
               
               on_widget_selected {
                 display_about_dialog
@@ -114,6 +122,33 @@ class Wordle
         }
       end
   
+      def display_instructions_dialog
+        message_box(body_root) {
+          text 'Instructions'
+          message <<~MULTI_LINE_STRING
+            Glimmer Wordle Instructions
+            
+            Make 6 guesses for a 5-letter word.
+            
+            If you enter a letter that is part of the word,
+            and at the right location in the word,
+            the letter will become green.
+            
+            If you enter a letter that is part of the word,
+            but at the wrong location in the word,
+            the letter will become yellow.
+            
+            If you enter a letter that is not part of the word,
+            the letter will become red.
+            
+            If you win or lose, you get to see the answer,
+            and share the result emojis.
+            
+            Happy Glimmer Wordle!
+          MULTI_LINE_STRING
+        }.open
+      end
+      
       def display_about_dialog
         message_box(body_root) {
           text 'About'
