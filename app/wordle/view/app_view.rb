@@ -355,13 +355,11 @@ class Wordle
       end
       
       def do_type(character)
-        @letter = @letters.find {|letter| letter.string == ''}
-        index = @letters.index(@letter)
-        if @letter
-          @borders.each { |caret| caret.foreground = :gray}
-          @borders[index == 4 ? 4 : index + 1].foreground = :title_background
-          @letter.string = character.upcase
-        end
+        highlighted_letter_index = @borders.each_with_index.find {|border, i| border.foreground.first == color(:title_background).swt_color }.last
+        @letter = @letters[highlighted_letter_index]
+        @borders.each { |caret| caret.foreground = :gray}
+        @borders[highlighted_letter_index == 4 ? 4 : highlighted_letter_index + 1].foreground = :title_background
+        @letter.string = character.upcase
       end
       
       def do_restart
