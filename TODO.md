@@ -1,9 +1,5 @@
 # TODO
 
-## Next (v1.1.0)
-
-- Navigate letters with left and right keyboard buttons (or mouse click) and re-enter a letter (without having to use backspace)
-
 ## Future
 
 - Prevent user from entering the same 5-letter word twice
@@ -24,3 +20,4 @@
 ## Maybe
 
 - Enable users to enter letters with the mini-keyboard using mouse clicks
+- Navigate between letters using mouse click

@@ -41,6 +41,10 @@ class Wordle
           on_swt_keydown do |key_event|
             if key_event.keyCode == 8
               do_backspace
+            elsif key_event.keyCode == swt(:arrow_left)
+              do_left
+            elsif key_event.keyCode == swt(:arrow_right)
+              do_right
             elsif key_event.keyCode == swt(:cr)
               if @five_letter_word.status == :in_progress
                 do_guess
@@ -53,6 +57,7 @@ class Wordle
           end
         }
         @five_letter_word = Model::FiveLetterWord.new
+        @five_letter_word.answer = 'swore'
         config = load_config
         @alphabet_layout = config[:alphabet_layout] || :alphabetical
       end
@@ -354,12 +359,30 @@ class Wordle
         body_root.pack(true)
       end
       
+      def highlighted_letter_index
+        @borders.each_with_index.find {|border, i| border.foreground.first == color(:title_background).swt_color }.last
+      end
+      
       def do_type(character)
-        highlighted_letter_index = @borders.each_with_index.find {|border, i| border.foreground.first == color(:title_background).swt_color }.last
-        @letter = @letters[highlighted_letter_index]
-        @borders.each { |caret| caret.foreground = :gray}
-        @borders[highlighted_letter_index == 4 ? 4 : highlighted_letter_index + 1].foreground = :title_background
+        index = highlighted_letter_index
+        @letter = @letters[index]
         @letter.string = character.upcase
+        if @letters.any? {|letter| letter.string == ''}
+          @borders.each { |caret| caret.foreground = :gray}
+          @borders[index == 4 ? 4 : index + 1].foreground = :title_background
+        end
+      end
+      
+      def do_left
+        index = [highlighted_letter_index - 1, 0].max
+        @borders.each { |caret| caret.foreground = :gray}
+        @borders[index].foreground = :title_background
+      end
+      
+      def do_right
+        index = [highlighted_letter_index + 1, @letters.count - 1].min
+        @borders.each { |caret| caret.foreground = :gray}
+        @borders[index].foreground = :title_background
       end
       
       def do_restart
