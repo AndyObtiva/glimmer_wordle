@@ -7,6 +7,7 @@ rescue
   # this runs when packaged as a gem (no bundler)
   require 'glimmer-dsl-swt'
   # add more gems if needed
+  require 'clipboard'
 end
 
 Clipboard.implementation = Clipboard::Java

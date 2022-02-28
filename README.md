@@ -1,4 +1,4 @@
-# <img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=85 /> Glimmer Wordle 1.1.0
+# <img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=85 /> Glimmer Wordle 1.1.1
 ## Play Wordle Endlessly with No Limit!
 [![Gem Version](https://badge.fury.io/rb/glimmer_wordle.svg)](http://badge.fury.io/rb/glimmer_wordle)
 

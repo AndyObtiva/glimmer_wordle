@@ -1,6 +1,10 @@
 # Change Log
 
-# 1.1.0
+## 1.1.1
+
+- Fix issue with loading `clipboard` gem when running `glimmer_wordle` command from Ruby gem.
+
+## 1.1.0
 
 - Display answer when losing
 - Close Share Emoji dialog when restarting game (with ENTER button or menu item)
@@ -15,7 +19,7 @@
 - Fix issue where upon restart, the guess button is showing above the entry field instead of below it
 - Fix issue with backspacing making letter highlight go to last letter when word is empty
 
-# 1.0.0
+## 1.0.0
 
 - Play wordle game
 - Restart wordle game
