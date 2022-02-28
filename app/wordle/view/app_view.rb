@@ -21,7 +21,7 @@ class Wordle
           %w[K L M N O P Q R S],
           %w[T U V W X Y Z],
         ],
-        querty: [
+        qwerty: [
           %w[Q W E R T Y U I O P],
           %w[A S D F G H J K L],
           %w[Z X C V B N M],
@@ -133,11 +133,11 @@ class Wordle
               }
               
               menu_item(:radio) {
-                text '&Querty'
-                selection @alphabet_layout == :querty
+                text '&Qwerty'
+                selection @alphabet_layout == :qwerty
                 
                 on_widget_selected {
-                  self.alphabet_layout = :querty
+                  self.alphabet_layout = :qwerty
                   rebuild_alphabet_container
                 }
               }

@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.2.0
+
+- Correct spelling of querty as qwerty
+
 ## 1.1.1
 
 - Fix issue with loading `clipboard` gem when running `glimmer_wordle` command from Ruby gem.
