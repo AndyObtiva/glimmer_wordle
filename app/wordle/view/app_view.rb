@@ -57,7 +57,6 @@ class Wordle
           end
         }
         @five_letter_word = Model::FiveLetterWord.new
-        @five_letter_word.answer = 'swore'
         config = load_config
         @alphabet_layout = config[:alphabet_layout] || :alphabetical
       end

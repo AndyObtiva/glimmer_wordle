@@ -1,4 +1,4 @@
-# <img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=85 /> Glimmer Wordle 1.0.0
+# <img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=85 /> Glimmer Wordle 1.1.0
 ## Play Wordle Endlessly with No Limit!
 [![Gem Version](https://badge.fury.io/rb/glimmer_wordle.svg)](http://badge.fury.io/rb/glimmer_wordle)
 
@@ -14,9 +14,9 @@
 
 ### Download
 
-[<img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=40 /> Download Glimmer Wordle DMG for Mac ARM64 Monterey and Older](https://www.dropbox.com/s/t77si617tsaxe0c/Glimmer%20Wordle-arm64-1.0.0.dmg?dl=1)
+[<img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=40 /> Download Glimmer Wordle 1.1.0 DMG for Mac ARM64 Monterey and Older](https://www.dropbox.com/s/j2j5cyor90jr7rj/Glimmer%20Wordle-ARM64-1.1.0.dmg?dl=1)
 
-[<img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=40 /> Download Glimmer Wordle DMG for Mac x86_64 Catalina and Older](https://www.dropbox.com/s/amlrm4nufdlzlb1/Glimmer%20Wordle-1.0.0.dmg?dl=1)
+[<img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=40 /> Download Glimmer Wordle 1.1.0 DMG for Mac x86_64 Catalina and Older](https://www.dropbox.com/s/t6tjuzp4dhmuls9/Glimmer%20Wordle-1.1.0.dmg?dl=1)
 
 ### Install Ruby Gem
 
