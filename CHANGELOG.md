@@ -4,6 +4,7 @@
 
 - Correct spelling of querty as qwerty
 - Shorten help instructions to fit vertically in Monterey/Big-Sur style message box
+- Ensure that the alphabet layout retains colors when switched in the middle of a game
 
 ## 1.1.1
 

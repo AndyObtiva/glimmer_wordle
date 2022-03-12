@@ -470,6 +470,7 @@ class Wordle
         }
         @alphabet_container.layout(true, true)
         @alphabet_container.pack(true)
+        update_alphabet_background_colors
       end
       
       def alphabet_layout=(value)
