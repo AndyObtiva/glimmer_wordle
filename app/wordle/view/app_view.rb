@@ -170,25 +170,16 @@ class Wordle
         message_box(body_root) {
           text 'Instructions'
           message <<~MULTI_LINE_STRING
-            Glimmer Wordle Instructions
-            
             Make 6 guesses for a 5-letter word.
             
             If you enter a letter that is part of the word,
-            and at the right location in the word,
-            the letter will become green.
+            and at the right location, it becomes green,
             
             If you enter a letter that is part of the word,
-            but at the wrong location in the word,
-            the letter will become yellow.
+            but at the wrong location, it becomes yellow.
             
             If you enter a letter that is not part of the word,
-            the letter will become red.
-            
-            If you win or lose, you get to see the answer,
-            and share the result emojis.
-            
-            Happy Glimmer Wordle!
+            it become red.
           MULTI_LINE_STRING
         }.open
       end

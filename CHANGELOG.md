@@ -3,6 +3,7 @@
 ## 1.2.0
 
 - Correct spelling of querty as qwerty
+- Shorten help instructions to fit vertically in Monterey/Big-Sur style message box
 
 ## 1.1.1
 

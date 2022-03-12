@@ -2,7 +2,6 @@
 
 ## Next
 
-- Shorten help instructions to fit vertically in Monterey/Big-Sur style message box
 - Ensure that alphabet layout retains colors when switched in the middle of a game
 - Prevent user from entering the same 5-letter word twice
 - Being able to re-open share dialog after closing at the end of a game
