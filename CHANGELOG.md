@@ -1,6 +1,6 @@
 # Change Log
 
-## 1.2.0
+## 1.1.2
 
 - Correct spelling of querty as qwerty
 - Shorten help instructions to fit vertically in Monterey/Big-Sur style message box

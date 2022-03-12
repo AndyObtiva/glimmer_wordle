@@ -172,14 +172,11 @@ class Wordle
           message <<~MULTI_LINE_STRING
             Make 6 guesses for a 5-letter word.
             
-            If you enter a letter that is part of the word,
-            and at the right location, it becomes green,
+            If you enter a letter that is part of the word, and at the right location, it becomes green,
             
-            If you enter a letter that is part of the word,
-            but at the wrong location, it becomes yellow.
+            If you enter a letter that is part of the word, but at the wrong location, it becomes yellow.
             
-            If you enter a letter that is not part of the word,
-            it become red.
+            If you enter a letter that is not part of the word, it become red.
           MULTI_LINE_STRING
         }.open
       end
