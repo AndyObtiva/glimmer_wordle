@@ -36,6 +36,10 @@ Afterwards, run:
 glimmer_wordle
 ```
 
+## Process
+
+[Glimmer Process](https://github.com/AndyObtiva/glimmer/blob/master/PROCESS.md)
+
 ## Contributing
 
 -   Check out the latest master to make sure the feature hasn't been
