@@ -6,6 +6,12 @@
 
 ![Wordle Screenshot](screenshots/glimmer-wordle.png)
 
+Other [Glimmer](https://github.com/AndyObtiva/glimmer) games:
+
+[<img alt="Glimmer Klondike Solitaire Icon" src="https://raw.githubusercontent.com/AndyObtiva/glimmer_klondike_solitaire/master/icons/linux/Glimmer%20Klondike%20Solitaire.png" height=40 /> Glimmer Klondike Solitaire](https://github.com/AndyObtiva/glimmer_klondike_solitaire)
+
+[<img alt="Glimmer Tetris Icon" src="https://raw.githubusercontent.com/AndyObtiva/glimmer_tetris/master/package/linux/Glimmer%20Tetris.png" height=40 /> Glimmer Tetris](https://github.com/AndyObtiva/glimmer_tetris)
+
 ## Demo
 
 ![Wordle Screenshot](screenshots/glimmer-wordle.gif)
