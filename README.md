@@ -4,6 +4,8 @@
 
 [Wordle](https://en.wikipedia.org/wiki/Wordle) word game desktop GUI app written [test-first](https://github.com/AndyObtiva/wordle/blob/master/spec/app/model/five_letter_word_spec.rb) using [Glimmer DSL for SWT](https://github.com/AndyObtiva/glimmer-dsl-swt) (JRuby Desktop Development GUI Framework) as inspiration by [Kevin Newton's blog post](https://kddnewton.com/2022/01/29/solving-wordle-in-ruby.html).
 
+(Since the desktop version can leverage a real keyboard, there is no need to display the alphabets following the Qwerty layout, so they are displayed alphabetically to enable a more user-friendly experience, but the Qwerty layout is available as an [option](#options) if desired.)
+
 Mac | Linux
 ----|------
 ![Wordle Screenshot](screenshots/glimmer-wordle.png) | ![Wordle Screenshot Linux](screenshots/glimmer-wordle-linux.png)
@@ -47,6 +49,18 @@ Afterwards, run:
 ```
 glimmer_wordle
 ```
+
+## Options
+
+The game menu bar has these View menu options:
+
+1- **View -> Alphabet Layout -> Alphabetical**: Displays alphabets alphabetically
+
+![Wordle Screenshot Alphabetical](screenshots/glimmer-wordle.png)
+
+2- **View -> Alphabet Layout -> Qwerty**: Displays alphabets with the Qwerty keyboard layout
+
+![Wordle Screenshot Qwerty](screenshots/glimmer-wordle-qwerty.png)
 
 ## Process
 
