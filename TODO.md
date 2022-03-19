@@ -34,8 +34,6 @@
 
 - Support Windows
 - Package Native Executable for Windows
-- Support Linux
-- Package Native Executable for Linux
 
 ### GUI Toolkits
 

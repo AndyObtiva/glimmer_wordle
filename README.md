@@ -1,16 +1,18 @@
-# <img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=85 /> Glimmer Wordle 1.1.2
+# <img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=85 /> Glimmer Wordle 1.1.3
 ## Play Wordle Endlessly with No Limit!
 [![Gem Version](https://badge.fury.io/rb/glimmer_wordle.svg)](http://badge.fury.io/rb/glimmer_wordle)
 
 [Wordle](https://en.wikipedia.org/wiki/Wordle) word game desktop GUI app written [test-first](https://github.com/AndyObtiva/wordle/blob/master/spec/app/model/five_letter_word_spec.rb) using [Glimmer DSL for SWT](https://github.com/AndyObtiva/glimmer-dsl-swt) (JRuby Desktop Development GUI Framework) as inspiration by [Kevin Newton's blog post](https://kddnewton.com/2022/01/29/solving-wordle-in-ruby.html).
 
-![Wordle Screenshot](screenshots/glimmer-wordle.png)
+Mac | Linux
+----|------
+![Wordle Screenshot](screenshots/glimmer-wordle.png) | ![Wordle Screenshot Linux](screenshots/glimmer-wordle-linux.png)
 
 Other [Glimmer](https://github.com/AndyObtiva/glimmer) games:
 
-[<img alt="Glimmer Klondike Solitaire Icon" src="https://raw.githubusercontent.com/AndyObtiva/glimmer_klondike_solitaire/master/icons/linux/Glimmer%20Klondike%20Solitaire.png" height=40 /> Glimmer Klondike Solitaire](https://github.com/AndyObtiva/glimmer_klondike_solitaire)
-
 [<img alt="Glimmer Tetris Icon" src="https://raw.githubusercontent.com/AndyObtiva/glimmer_tetris/master/package/linux/Glimmer%20Tetris.png" height=40 /> Glimmer Tetris](https://github.com/AndyObtiva/glimmer_tetris)
+
+[<img alt="Glimmer Klondike Solitaire Icon" src="https://raw.githubusercontent.com/AndyObtiva/glimmer_klondike_solitaire/master/icons/linux/Glimmer%20Klondike%20Solitaire.png" height=40 /> Glimmer Klondike Solitaire](https://github.com/AndyObtiva/glimmer_klondike_solitaire)
 
 ## Demo
 
@@ -23,6 +25,10 @@ Other [Glimmer](https://github.com/AndyObtiva/glimmer) games:
 [<img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=40 /> Download Glimmer Wordle 1.1.2 DMG for Mac ARM64 Monterey and Older](https://www.dropbox.com/s/rmanrz81qfrpqq5/Glimmer%20Wordle-arm64-1.1.2.dmg?dl=1)
 
 [<img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=40 /> Download Glimmer Wordle 1.1.2 DMG for Mac x86_64 Catalina and Older](https://www.dropbox.com/s/ysureb9o1dky7w0/Glimmer%20Wordle-1.1.2.dmg?dl=1)
+
+[<img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=40 /> Download Glimmer Wordle 1.1.3 DEB for Linux x86_64](https://www.dropbox.com/s/7jybodbf4pewhtd/glimmer-wordle_1.1.3-1_amd64.deb?dl=1)
+
+[<img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=40 /> Download Glimmer Wordle 1.1.3 RPM for Linux x86_64](https://www.dropbox.com/s/dfpjnquchxzl823/glimmer-wordle-1.1.3-1.x86_64.rpm?dl=1)
 
 ### Install Ruby Gem
 

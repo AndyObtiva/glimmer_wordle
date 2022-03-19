@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.1.3
+
+- Officially Support Linux with improved fonts/look and feel
+- Package DEB Native Executable for Linux
+
 ## 1.1.2
 
 - Correct spelling of querty as qwerty

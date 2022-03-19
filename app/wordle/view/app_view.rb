@@ -244,8 +244,8 @@ class Wordle
                 line_width 2
               }
               
-              @alphabet_letters << text(alphabet_character) {
-                font style: :bold, height: 28
+              @alphabet_letters << text(alphabet_character, :default, [:default, OS.linux? ? 5 : 0]) {
+                font alphabet_font
               }
             }
           end
@@ -280,8 +280,8 @@ class Wordle
                 line_width 2
               }
               
-              @letters << text('') {
-                font style: :bold, height: 40
+              @letters << text('', :default, [:default, OS.linux? ? 6 : 0]) {
+                font letter_font
               }
             }
           end
@@ -435,8 +435,6 @@ class Wordle
           grid_layout
           text 'Share Result'
           
-          app_menu_bar
-          
           label {
             layout_data :center, :center, true, false
             text 'Result is copied to clipboard!'
@@ -451,6 +449,18 @@ class Wordle
           }
         }
         @share_text_dialog.open
+      end
+      
+      def alphabet_font
+        the_font = {style: :bold, height: 28}
+        the_font.merge!(name: 'Helvetica', height: 21) if OS.linux?
+        the_font
+      end
+      
+      def letter_font
+        the_font = {style: :bold, height: 40}
+        the_font.merge!(name: 'Helvetica', height: 30) if OS.linux?
+        the_font
       end
       
       def dispose_alphabet_container_children
