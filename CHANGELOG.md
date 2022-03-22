@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.1.4
+
+- Fix this issue: type one letter, navigate with right-arrow to the last letter, type another letter, hit backspace. Instead of deleting the last letter that the caret/cursor is on, it deletes the first letter instead.
+
 ## 1.1.3
 
 - Officially support Linux with improved fonts/look and feel

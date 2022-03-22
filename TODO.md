@@ -2,23 +2,41 @@
 
 ## Next
 
-- French language
- - Make FiveLetterWord take language as an argument
- - Parameterize allowed guesses and answers by language as English or French
- - Menu item for switching language between English and French
- - Store language in game flatfile database (yaml file)
- - Disable Qwerty option and make sure Alphabetical layout is used for all languages other than English (French)
- - Add an attribute to FiveLetterWord to change language mid-game (restaring it)
+- Include link to project in copied text upon winning, and hide word to avoid making it easy to discover words in the future.
+
+Example:
+
+Glimmer Wordle 183
+
+⬜🟩⬜⬜⬜
+🟨⬜⬜⬜🟨
+🟩🟩🟩🟨⬜
+⬜⬜⬜🟩⬜
+🟩🟩🟩🟩🟩
+
+https://github.com/AndyObtiva/glimmer_wordle
+
+RT
+
+#glimmer #wordle"
+
+- Fix issue
 
 ## Future
 
 ### Features
 
-- Prevent user from entering the same 5-letter word twice
-- Being able to re-open share dialog after closing at the end of a game
-- Keeping history of emoji statuses (but not answers to avoid ruining the game by making it easy to guess answers through history)
+- Keeping history of emoji statuses (with word numbers, not the words themselves, to avoid helping people crack future words more easily)
+- Ability to copy emoji statuses from history to paste/tweet
 
 ### Languages
+- French language
+  - Make FiveLetterWord take language as an argument
+  - Parameterize allowed guesses and answers by language as English or French
+  - Menu item for switching language between English and French
+  - Store language in game flatfile database (yaml file)
+  - Disable Qwerty option and make sure Alphabetical layout is used for all languages other than English (French)
+  - Add an attribute to FiveLetterWord to change language mid-game (restaring it)
 - German language
 - Swedish language
 - Norwegian language
@@ -49,3 +67,4 @@
 
 - Enable users to enter letters with the mini-keyboard using mouse clicks
 - Navigate between letters using mouse click
+- Prevent user from entering the same 5-letter word twice

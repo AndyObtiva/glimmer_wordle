@@ -176,7 +176,7 @@ class Wordle
             
             If you enter a letter that is part of the word, but at the wrong location, it becomes yellow.
             
-            If you enter a letter that is not part of the word, it become red.
+            If you enter a letter that is not part of the word, it becomes red.
           MULTI_LINE_STRING
         }.open
       end
@@ -300,12 +300,16 @@ class Wordle
       end
       
       def do_backspace
-        @letter = @letters.find {|letter| letter.string == ''}
-        index = @letter ? [@letters.index(@letter) - 1, 0].max : 4
-        @letter = @letters[index]
+        @letter = @letters[highlighted_letter_index]
+        if @letter.string != ''
+          index_to_delete = highlighted_letter_index
+        else
+          index_to_delete = [highlighted_letter_index - 1, 0].max
+        end
+        @letter = @letters[index_to_delete]
         @letter.string = ''
-        @borders.each { |caret| caret.foreground = :gray}
-        @borders[index].foreground = :title_background
+        @borders.each { |caret| caret.foreground = :gray} # refactor this reusable code into a method that highlights the caret
+        @borders[index_to_delete].foreground = :title_background
       end
       
       def do_guess
@@ -355,20 +359,20 @@ class Wordle
         @letter = @letters[index]
         @letter.string = character.upcase
         if @letters.any? {|letter| letter.string == ''}
-          @borders.each { |caret| caret.foreground = :gray}
+          @borders.each { |caret| caret.foreground = :gray} # refactor this reusable code into a method that highlights the caret
           @borders[index == 4 ? 4 : index + 1].foreground = :title_background
         end
       end
       
       def do_left
         index = [highlighted_letter_index - 1, 0].max
-        @borders.each { |caret| caret.foreground = :gray}
+        @borders.each { |caret| caret.foreground = :gray} # refactor this reusable code into a method that highlights the caret
         @borders[index].foreground = :title_background
       end
       
       def do_right
         index = [highlighted_letter_index + 1, @letters.count - 1].min
-        @borders.each { |caret| caret.foreground = :gray}
+        @borders.each { |caret| caret.foreground = :gray} # refactor this reusable code into a method that highlights the caret
         @borders[index].foreground = :title_background
       end
       
