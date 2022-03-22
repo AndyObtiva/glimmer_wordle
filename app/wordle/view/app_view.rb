@@ -176,7 +176,7 @@ class Wordle
             
             If you enter a letter that is part of the word, but at the wrong location, it becomes yellow.
             
-            If you enter a letter that is not part of the word, it become red.
+            If you enter a letter that is not part of the word, it becomes red.
           MULTI_LINE_STRING
         }.open
       end
