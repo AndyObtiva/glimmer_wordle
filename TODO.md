@@ -2,6 +2,7 @@
 
 ## Next
 
+- Support Dark Mode (letters do not show up in Dark Mode on Mac Monterey)
 - Include link to project in copied text upon winning, and hide word to avoid making it easy to discover words in the future.
 
 Example:
