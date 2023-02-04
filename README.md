@@ -26,7 +26,7 @@ Other [Glimmer](https://github.com/AndyObtiva/glimmer) games:
 
 [<img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=40 /> Download Glimmer Wordle 1.1.4 DMG for Mac ARM64 Ventura and Older](https://www.dropbox.com/s/diah745mycc8elz/Glimmer%20Wordle-1.1.4-arm64.dmg?dl=1)
 
-[<img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=40 /> Download Glimmer Wordle 1.1.4 DMG for Mac x86_64 Monterey and Older](https://www.dropbox.com/s/8epnwopq050r69m/Glimmer%20Wordle-1.1.4-x86_64-monterey.dmg?dl=1)
+[<img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=40 /> Download Glimmer Wordle 1.1.4 DMG for Mac x86_64 Monterey and Big Sur](https://www.dropbox.com/s/8epnwopq050r69m/Glimmer%20Wordle-1.1.4-x86_64-monterey.dmg?dl=1)
 
 [<img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=40 /> Download Glimmer Wordle 1.1.2 DMG for Mac x86_64 Catalina and Older](https://www.dropbox.com/s/ysureb9o1dky7w0/Glimmer%20Wordle-1.1.2.dmg?dl=1)
 
