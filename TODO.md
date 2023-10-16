@@ -21,8 +21,6 @@ RT
 
 #glimmer #wordle"
 
-- Fix issue
-
 ## Future
 
 ### Features
@@ -69,3 +67,9 @@ RT
 - Enable users to enter letters with the mini-keyboard using mouse clicks
 - Navigate between letters using mouse click
 - Prevent user from entering the same 5-letter word twice
+
+## Issues
+
+- It seems some words are missing from the original wordle dictionary of words, so consider adding them into a new file that supplants the original wordle dictionary for possible words that will not be an answer:
+  - `aries`, ...
+
