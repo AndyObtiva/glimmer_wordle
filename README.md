@@ -1,4 +1,4 @@
-# <img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=85 /> Glimmer Wordle 1.1.4
+# <img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=85 /> Glimmer Wordle 1.1.5
 ## Play Wordle Endlessly with No Limit!
 [![Gem Version](https://badge.fury.io/rb/glimmer_wordle.svg)](http://badge.fury.io/rb/glimmer_wordle)
 
@@ -6,9 +6,9 @@
 
 (Since the desktop version can leverage a real keyboard, there is no need to display the alphabets following the Qwerty layout, so they are displayed alphabetically to enable a more user-friendly experience, but the Qwerty layout is available as an [option](#options) if desired.)
 
-Mac | Linux
-----|------
-![Wordle Screenshot](screenshots/glimmer-wordle.png) | ![Wordle Screenshot Linux](screenshots/glimmer-wordle-linux.png)
+Mac | Windows | Linux
+----|---------|------
+![Wordle Screenshot](screenshots/glimmer-wordle.png) | ![Wordle Screenshot Windows](screenshots/glimmer-wordle-windows.png) | ![Wordle Screenshot Linux](screenshots/glimmer-wordle-linux.png)
 
 Other [Glimmer](https://github.com/AndyObtiva/glimmer) games:
 
@@ -96,7 +96,7 @@ The game menu bar has these View menu options:
 
 [MIT](LICENSE.txt)
 
-Copyright (c) 2022 Andy Maleh. See
+Copyright (c) 2022-2023 Andy Maleh. See
 [LICENSE.txt](LICENSE.txt) for further details.
 
 --

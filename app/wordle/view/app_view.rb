@@ -86,6 +86,7 @@ class Wordle
           label {
             layout_data :center, :center, true, false
             text 'You have 6 tries to guess a 5-letter word'
+            background :transparent if OS.windows?
           }
           
           word_guesser
@@ -244,7 +245,7 @@ class Wordle
                 line_width 2
               }
               
-              @alphabet_letters << text(alphabet_character, :default, [:default, OS.linux? ? 5 : 0]) {
+              @alphabet_letters << text(alphabet_character, :default, [:default, OS.linux? ? 5 : (OS.windows? ? 1 : 0)]) {
                 font alphabet_font
               }
             }
@@ -280,7 +281,7 @@ class Wordle
                 line_width 2
               }
               
-              @letters << text('', :default, [:default, OS.linux? ? 6 : 0]) {
+              @letters << text('', :default, [:default, OS.linux? ? 6 : (OS.windows? ? 1 : 0)]) {
                 font letter_font
               }
             }
@@ -449,6 +450,7 @@ class Wordle
             editable false
             caret nil
             alignment :center
+            font name: 'Segoe UI Emoji' if OS.windows?
             text result
           }
         }
@@ -458,12 +460,14 @@ class Wordle
       def alphabet_font
         the_font = {style: :bold, height: 28}
         the_font.merge!(name: 'Helvetica', height: 21) if OS.linux?
+        the_font.merge!(name: 'Arial', height: 25) if OS.windows? 
         the_font
       end
       
       def letter_font
         the_font = {style: :bold, height: 40}
         the_font.merge!(name: 'Helvetica', height: 30) if OS.linux?
+        the_font.merge!(name: 'Arial', height: 32) if OS.windows? 
         the_font
       end
       

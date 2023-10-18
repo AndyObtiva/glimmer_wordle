@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.1.5
+
+- Tweak styling for Windows to have the app look good in it.
+
 ## 1.1.4
 
 - Fix this issue: type one letter, navigate with right-arrow to the last letter, type another letter, hit backspace. Instead of deleting the last letter that the caret/cursor is on, it deletes the first letter instead.

@@ -15,7 +15,7 @@ require 'juwelier'
 Juwelier::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
   gem.name = "glimmer_wordle"
-  gem.homepage = "http://github.com/AndyObtiva/glimmer_wordle"
+  gem.homepage = "https://github.com/AndyObtiva/glimmer_wordle"
   gem.license = "MIT"
   gem.summary = %Q{Glimmer Wordle - Word Game Desktop GUI App}
   gem.description = %Q{Glimmer Wordle - Word Game Desktop GUI App Written in Glimmer DSL for SWT (requires JRuby) - Play Wordle Endlessly with No Limit!}
