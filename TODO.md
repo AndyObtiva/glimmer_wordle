@@ -2,7 +2,6 @@
 
 ## Next
 
-- Support Dark Mode (letters do not show up in Dark Mode on Mac Monterey)
 - Include link to project in copied text upon winning, and hide word to avoid making it easy to discover words in the future.
 
 Example:
@@ -66,10 +65,9 @@ RT
 
 - Enable users to enter letters with the mini-keyboard using mouse clicks
 - Navigate between letters using mouse click
-- Prevent user from entering the same 5-letter word twice
+- Prevent user from entering the same 5-letter word twice (preventing repeating / repetition of a word)
 
 ## Issues
 
 - It seems some words are missing from the original wordle dictionary of words, so consider adding them into a new file that supplants the original wordle dictionary for possible words that will not be an answer:
   - `aries`, ...
-

@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.1.6
+
+- Dark Mode support
+
 ## 1.1.5
 
 - Tweak styling for Windows to have the app look good in it.

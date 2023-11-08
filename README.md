@@ -1,4 +1,4 @@
-# <img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=85 /> Glimmer Wordle 1.1.5
+# <img src='https://raw.githubusercontent.com/AndyObtiva/glimmer_wordle/master/icons/linux/Glimmer Wordle.png' height=85 /> Glimmer Wordle 1.1.6
 ## Play Wordle Endlessly with No Limit!
 [![Gem Version](https://badge.fury.io/rb/glimmer_wordle.svg)](http://badge.fury.io/rb/glimmer_wordle)
 
@@ -63,6 +63,10 @@ The game menu bar has these View menu options:
 2- **View -> Alphabet Layout -> Qwerty**: Displays alphabets with the Qwerty keyboard layout
 
 ![Wordle Screenshot Qwerty](screenshots/glimmer-wordle-qwerty.png)
+
+Also, the game supports Dark Mode, and will adopt a Dark Mode theme automatically if you start it with your System Settings having Dark Mode.
+
+![Wordle Mac Dark Mode](screenshots/glimmer-wordle-mac-dark-mode.png)
 
 ## Process
 

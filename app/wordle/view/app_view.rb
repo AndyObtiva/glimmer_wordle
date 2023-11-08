@@ -77,7 +77,7 @@ class Wordle
           image File.join(APP_ROOT, 'icons', 'windows', "Glimmer Wordle.ico") if OS.windows?
           image File.join(APP_ROOT, 'icons', 'linux', "Glimmer Wordle.png") unless OS.windows?
           text "Glimmer Wordle"
-          background :white
+          background Display.system_dark_theme? ? :black : :white
           
           app_menu_bar
           
@@ -86,6 +86,7 @@ class Wordle
           label {
             layout_data :center, :center, true, false
             text 'You have 6 tries to guess a 5-letter word'
+            background Display.system_dark_theme? ? :black : :transparent
             background :transparent if OS.windows?
           }
           
@@ -199,7 +200,7 @@ class Wordle
             vertical_spacing 0
           }
           
-          background :white
+          background Display.system_dark_theme? ? :black : :white
         
           alphabets
         }
@@ -231,22 +232,23 @@ class Wordle
       def alphabet_row(alphabet_characters, &block)
         canvas {
           block.call
-          background :white
+          background Display.system_dark_theme? ? :black : :white
           
           @alphabet_rectangles ||= []
           @alphabet_borders ||= []
           @alphabet_letters ||= []
           alphabet_characters.each_with_index do |alphabet_character, i|
             @alphabet_rectangles << rectangle(1 + i*32, @alphabet_row_offset_y, 28, 28) {
-              background :transparent
+              background Display.system_dark_theme? ? :black : :transparent
               
               @alphabet_borders << rectangle {
-                foreground :gray
+                foreground Display.system_dark_theme? ? :white : :gray
                 line_width 2
               }
               
               @alphabet_letters << text(alphabet_character, :default, [:default, OS.linux? ? 5 : (OS.windows? ? 1 : 0)]) {
                 font alphabet_font
+                foreground Display.system_dark_theme? ? :white : :black
               }
             }
           end
@@ -266,7 +268,7 @@ class Wordle
             width_hint 230
             height_hint 50
           }
-          background :white
+          background Display.system_dark_theme? ? :black : :white
           focus true
           
           @rectangles = []
@@ -274,7 +276,7 @@ class Wordle
           @letters = []
           5.times do |i|
             @rectangles << rectangle(margin_x + i*45, margin_y, 40, 40) {
-              background :transparent
+              background Display.system_dark_theme? ? :black : :transparent
               
               @borders << rectangle {
                 foreground i == 0 ? :title_background : :gray
@@ -283,6 +285,7 @@ class Wordle
               
               @letters << text('', :default, [:default, OS.linux? ? 6 : (OS.windows? ? 1 : 0)]) {
                 font letter_font
+                foreground Display.system_dark_theme? ? :white : :black
               }
             }
           end
@@ -293,6 +296,8 @@ class Wordle
         @guess_button = button {
           layout_data :center, :center, true, false
           text 'Guess'
+          background Display.system_dark_theme? ? :black : :white
+          foreground Display.system_dark_theme? ? :white : :black
           
           on_widget_selected do
             do_guess
@@ -460,14 +465,14 @@ class Wordle
       def alphabet_font
         the_font = {style: :bold, height: 28}
         the_font.merge!(name: 'Helvetica', height: 21) if OS.linux?
-        the_font.merge!(name: 'Arial', height: 25) if OS.windows? 
+        the_font.merge!(name: 'Arial', height: 25) if OS.windows?
         the_font
       end
       
       def letter_font
         the_font = {style: :bold, height: 40}
         the_font.merge!(name: 'Helvetica', height: 30) if OS.linux?
-        the_font.merge!(name: 'Arial', height: 32) if OS.windows? 
+        the_font.merge!(name: 'Arial', height: 32) if OS.windows?
         the_font
       end
       
